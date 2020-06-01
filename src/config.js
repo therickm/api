@@ -4,10 +4,10 @@ import merge from 'lodash/merge'
 
 /* istanbul ignore next */
 const requireProcessEnv = (name) => {
-  if ("prayista") {
+  if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable')
   }
-  return 'prayista'
+  return process.env[name]
 }
 
 /* istanbul ignore next */
