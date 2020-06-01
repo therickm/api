@@ -1,0 +1,12 @@
+GET https://prayistadb.herokuapp.com/quotes
+
+###
+POST https://prayistadb.herokuapp.com/quotes HTTP/1.1
+content-type: application/json
+
+{
+    "verse": "sample",
+    "application": "Wed, 21 Oct 2015 18:27:50 GMT",
+    "lessons":"test",
+    "date":"Wed, 21 Oct 2015 18:27:50 GMT",
+}

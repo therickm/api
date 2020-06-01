@@ -3,6 +3,14 @@ import user from './user'
 import auth from './auth'
 import passwordReset from './password-reset'
 import quote from './quote'
+import cell from './cell'
+import event from './event'
+import playlist from './playlist'
+import sermon from './sermon'
+import cell from './cell'
+import event from './event'
+import playlist from './playlist'
+import sermon from './sermon'
 
 const router = new Router()
 
@@ -33,5 +41,13 @@ router.use('/users', user)
 router.use('/auth', auth)
 router.use('/password-resets', passwordReset)
 router.use('/quotes', quote)
+router.use('/cells', cell)
+router.use('/events', event)
+router.use('/playlists', playlist)
+router.use('/sermons', sermon)
+router.use('/cells', cell)
+router.use('/events', event)
+router.use('/playlists', playlist)
+router.use('/sermons', sermon)
 
 export default router
