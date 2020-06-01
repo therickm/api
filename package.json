@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"main": "src",
 	"private": true,
+	"homepage": "./",
 	"scripts": {
 		"start": "node .",
 		"test": "jest",
