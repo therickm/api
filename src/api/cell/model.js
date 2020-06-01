@@ -10,7 +10,7 @@ const cellSchema = new Schema({
   phone: {
     type: String
   },
-  pac-input: {
+  pacInput: {
     type: String
   },
   description: {
@@ -35,7 +35,7 @@ cellSchema.methods = {
       name: this.name,
       leader: this.leader,
       phone: this.phone,
-      pac-input: this.pac-input,
+      pacInput: this.pacInput,
       description: this.description,
       user: this.user,
       createdAt: this.createdAt,

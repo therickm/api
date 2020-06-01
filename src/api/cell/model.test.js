@@ -3,7 +3,7 @@ import { Cell } from '.'
 let cell
 
 beforeEach(async () => {
-  cell = await Cell.create({ name: 'test', leader: 'test', phone: 'test', pac-input: 'test', description: 'test', user: 'test' })
+  cell = await Cell.create({ name: 'test', leader: 'test', phone: 'test', pacInput: 'test', description: 'test', user: 'test' })
 })
 
 describe('view', () => {
@@ -14,7 +14,7 @@ describe('view', () => {
     expect(view.name).toBe(cell.name)
     expect(view.leader).toBe(cell.leader)
     expect(view.phone).toBe(cell.phone)
-    expect(view.pac-input).toBe(cell.pac-input)
+    expect(view.pacInput).toBe(cell.pacInput)
     expect(view.description).toBe(cell.description)
     expect(view.user).toBe(cell.user)
     expect(view.createdAt).toBeTruthy()
@@ -28,7 +28,7 @@ describe('view', () => {
     expect(view.name).toBe(cell.name)
     expect(view.leader).toBe(cell.leader)
     expect(view.phone).toBe(cell.phone)
-    expect(view.pac-input).toBe(cell.pac-input)
+    expect(view.pacInput).toBe(cell.pacInput)
     expect(view.description).toBe(cell.description)
     expect(view.user).toBe(cell.user)
     expect(view.createdAt).toBeTruthy()
