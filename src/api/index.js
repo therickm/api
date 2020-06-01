@@ -7,8 +7,6 @@ import event from './event'
 import playlist from './playlist'
 import sermon from './sermon'
 import quote from './quote'
-import cell from './cell'
-import cell from './cell'
 
 const router = new Router()
 
@@ -43,7 +41,5 @@ router.use('/events', event)
 router.use('/playlists', playlist)
 router.use('/sermons', sermon)
 router.use('/quotes', quote)
-router.use('/cells', cell)
-router.use('/cells', cell)
 
 export default router
