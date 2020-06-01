@@ -14,13 +14,14 @@ beforeEach(async () => {
 test('POST /quotes 201', async () => {
   const { status, body } = await request(app())
     .post(`${apiRoot}`)
-    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test' })
+    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test', user: 'test' })
   expect(status).toBe(201)
   expect(typeof body).toEqual('object')
   expect(body.verse).toEqual('test')
   expect(body.application).toEqual('test')
   expect(body.lessons).toEqual('test')
   expect(body.date).toEqual('test')
+  expect(body.user).toEqual('test')
 })
 
 test('GET /quotes 200', async () => {
@@ -48,7 +49,7 @@ test('GET /quotes/:id 404', async () => {
 test('PUT /quotes/:id 200', async () => {
   const { status, body } = await request(app())
     .put(`${apiRoot}/${quote.id}`)
-    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test' })
+    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test', user: 'test' })
   expect(status).toBe(200)
   expect(typeof body).toEqual('object')
   expect(body.id).toEqual(quote.id)
@@ -56,12 +57,13 @@ test('PUT /quotes/:id 200', async () => {
   expect(body.application).toEqual('test')
   expect(body.lessons).toEqual('test')
   expect(body.date).toEqual('test')
+  expect(body.user).toEqual('test')
 })
 
 test('PUT /quotes/:id 404', async () => {
   const { status } = await request(app())
     .put(apiRoot + '/123456789098765432123456')
-    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test' })
+    .send({ verse: 'test', application: 'test', lessons: 'test', date: 'test', user: 'test' })
   expect(status).toBe(404)
 })
 

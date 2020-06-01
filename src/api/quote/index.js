@@ -6,7 +6,7 @@ import { schema } from './model'
 export Quote, { schema } from './model'
 
 const router = new Router()
-const { verse, application, lessons, date } = schema.tree
+const { verse, application, lessons, date, user } = schema.tree
 
 /**
  * @api {post} /quotes Create quote
@@ -16,12 +16,13 @@ const { verse, application, lessons, date } = schema.tree
  * @apiParam application Quote's application.
  * @apiParam lessons Quote's lessons.
  * @apiParam date Quote's date.
+ * @apiParam user Quote's user.
  * @apiSuccess {Object} quote Quote's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Quote not found.
  */
 router.post('/',
-  body({ verse, application, lessons, date }),
+  body({ verse, application, lessons, date, user }),
   create)
 
 /**
@@ -56,12 +57,13 @@ router.get('/:id',
  * @apiParam application Quote's application.
  * @apiParam lessons Quote's lessons.
  * @apiParam date Quote's date.
+ * @apiParam user Quote's user.
  * @apiSuccess {Object} quote Quote's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Quote not found.
  */
 router.put('/:id',
-  body({ verse, application, lessons, date }),
+  body({ verse, application, lessons, date, user }),
   update)
 
 /**

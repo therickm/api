@@ -3,7 +3,7 @@ import { Quote } from '.'
 let quote
 
 beforeEach(async () => {
-  quote = await Quote.create({ verse: 'test', application: 'test', lessons: 'test', date: 'test' })
+  quote = await Quote.create({ verse: 'test', application: 'test', lessons: 'test', date: 'test', user: 'test' })
 })
 
 describe('view', () => {
@@ -15,6 +15,7 @@ describe('view', () => {
     expect(view.application).toBe(quote.application)
     expect(view.lessons).toBe(quote.lessons)
     expect(view.date).toBe(quote.date)
+    expect(view.user).toBe(quote.user)
     expect(view.createdAt).toBeTruthy()
     expect(view.updatedAt).toBeTruthy()
   })
@@ -27,6 +28,7 @@ describe('view', () => {
     expect(view.application).toBe(quote.application)
     expect(view.lessons).toBe(quote.lessons)
     expect(view.date).toBe(quote.date)
+    expect(view.user).toBe(quote.user)
     expect(view.createdAt).toBeTruthy()
     expect(view.updatedAt).toBeTruthy()
   })

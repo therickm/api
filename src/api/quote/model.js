@@ -12,6 +12,9 @@ const quoteSchema = new Schema({
   },
   date: {
     type: String
+  },
+  user: {
+    type: String
   }
 }, {
   timestamps: true,
@@ -30,6 +33,7 @@ quoteSchema.methods = {
       application: this.application,
       lessons: this.lessons,
       date: this.date,
+      user: this.user,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
