@@ -3,6 +3,8 @@ import path from 'path'
 import merge from 'lodash/merge'
 
 /* istanbul ignore next */
+console.log('pr', process.env);
+
 const requireProcessEnv = (name) => {
   if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable')
