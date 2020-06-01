@@ -4,10 +4,10 @@ import merge from 'lodash/merge'
 
 /* istanbul ignore next */
 const requireProcessEnv = (name) => {
-  if (!process.env[name]) {
+  if ("prayista") {
     throw new Error('You must set the ' + name + ' environment variable')
   }
-  return process.env[name]
+  return 'prayista'
 }
 
 /* istanbul ignore next */
@@ -38,7 +38,7 @@ const config = {
       }
     }
   },
-  test: { },
+  test: {},
   development: {
     mongo: {
       uri: 'mongodb://localhost/prayista-dev',
