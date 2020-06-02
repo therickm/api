@@ -15,5 +15,10 @@ export const sendMail = ({
     subject,
     html: content
   }
-  return sendgridMail.send(msg)
+  return sendgridMail.send(msg).then(() => {
+    console.log('Message sent')
+  }).catch((error) => {
+    console.log(error.response.body)
+    // console.log(error.response.body.errors[0].message)
+  })
 }

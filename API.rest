@@ -1,5 +1,9 @@
-GET https://prayistadb.herokuapp.com/quotes
+GET https://prayistadb.herokuapp.com/users
+content-type: application/json
 
+{
+    "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZDVhY2FlMTU3Mjk3MDAxN2I2YjY5YSIsImlhdCI6MTU5MTA2MTcyOX0.LZ_zv7GfzO24HcfkibAzb4zZ3Og7pidIafnAb5B47kw"
+}
 ###
 POST https://prayistadb.herokuapp.com/quotes HTTP/1.1
 content-type: application/json

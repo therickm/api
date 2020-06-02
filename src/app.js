@@ -11,7 +11,7 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 const msg = {
   to: 'mudalit@gmail.com',
-  from: 'mudalit@gmail.com',
+  from: 'it@madrachi.ug',,
   subject: 'Sending with Twilio SendGrid is Fun',
   text: 'and easy to do anywhere, even with Node.js',
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
@@ -19,7 +19,12 @@ const msg = {
 // alert('sending...')
 console.log('sending message ', process.env.SENDGRID_KEY);
 
-sgMail.send(msg).then(res => console.log(res));
+sgMail.send(msg).then(() => {
+  console.log('Message sent')
+}).catch((error) => {
+  console.log(error.response.body)
+  // console.log(error.response.body.errors[0].message)
+})
 
 if (mongo.uri) {
   mongoose.connect(mongo.uri)
