@@ -16,7 +16,9 @@ const msg = {
   text: 'and easy to do anywhere, even with Node.js',
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 };
-alert('sending...')
+// alert('sending...')
+console.log('sending message');
+
 sgMail.send(msg).then(res => console.log(res));
 
 if (mongo.uri) {
