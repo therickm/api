@@ -16,7 +16,8 @@ const msg = {
   text: 'and easy to do anywhere, even with Node.js',
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 };
-sgMail.send(msg);
+alert('sending...')
+sgMail.send(msg).then(res => console.log(res));
 
 if (mongo.uri) {
   mongoose.connect(mongo.uri)
