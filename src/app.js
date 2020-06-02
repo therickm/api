@@ -8,7 +8,7 @@ const app = express(apiRoot, api)
 const server = http.createServer(app)
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 const msg = {
   to: 'test@example.com',
   from: 'test@example.com',
