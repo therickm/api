@@ -4,9 +4,11 @@ import mongoose, { Schema } from 'mongoose'
 import mongooseKeywords from 'mongoose-keywords'
 import { env } from '../../config'
 
-const roles = ['user', 'admin']
+const roles = ['user', 'admin', 'superUser']
+const state = ['pending', 'suspended', 'approved']
 
 const userSchema = new Schema({
+
   email: {
     type: String,
     match: /^\S+@\S+\.\S+$/,
@@ -25,10 +27,23 @@ const userSchema = new Schema({
     index: true,
     trim: true
   },
+  church: {
+    type: String,
+    trim: true
+  },
+  phone: {
+    type: String,
+    trim: true
+  },
   role: {
     type: String,
     enum: roles,
     default: 'user'
+  },
+  status: {
+    type: String,
+    enum: state,
+    default: 'pending'
   },
   picture: {
     type: String,
@@ -64,9 +79,9 @@ userSchema.pre('save', function (next) {
 })
 
 userSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {}
-    let fields = ['id', 'name', 'picture']
+    let fields = ['id', 'name', 'picture', 'phone', 'church']
 
     if (full) {
       fields = [...fields, 'email', 'createdAt']
@@ -77,7 +92,7 @@ userSchema.methods = {
     return view
   },
 
-  authenticate (password) {
+  authenticate(password) {
     return bcrypt.compare(password, this.password).then((valid) => valid ? this : false)
   }
 
