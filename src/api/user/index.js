@@ -60,7 +60,7 @@ router.get('/:id',
 * @apiSuccess {Object} user User's data.
 * @apiError 404 User not found.
 */
-router.get('/:q',
+router.get('/search/:q',
   churchSearch)
 
 /**
