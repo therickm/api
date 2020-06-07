@@ -51,6 +51,7 @@ router.get('/me',
  */
 router.get('/:id',
   show)
+// try saerch
 
 /**
 * @api {get} /users/:q Search Churches/users
