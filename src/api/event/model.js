@@ -34,7 +34,7 @@ const eventSchema = new Schema({
 })
 
 eventSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,

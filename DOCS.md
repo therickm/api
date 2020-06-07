@@ -92,7 +92,7 @@
 | name			| 			|  <p>Cell's name.</p>							|
 | leader			| 			|  <p>Cell's leader.</p>							|
 | phone			| 			|  <p>Cell's phone.</p>							|
-| pac-input			| 			|  <p>Cell's pac-input.</p>							|
+| pacInput			| 			|  <p>Cell's pacInput.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
 
@@ -141,7 +141,7 @@
 | name			| 			|  <p>Cell's name.</p>							|
 | leader			| 			|  <p>Cell's leader.</p>							|
 | phone			| 			|  <p>Cell's phone.</p>							|
-| pac-input			| 			|  <p>Cell's pac-input.</p>							|
+| pacInput			| 			|  <p>Cell's pacInput.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
 
@@ -334,6 +334,7 @@
 | application			| 			|  <p>Quote's application.</p>							|
 | lessons			| 			|  <p>Quote's lessons.</p>							|
 | date			| 			|  <p>Quote's date.</p>							|
+| user			| 			|  <p>Quote's user.</p>							|
 
 ## Delete quote
 
@@ -381,6 +382,7 @@
 | application			| 			|  <p>Quote's application.</p>							|
 | lessons			| 			|  <p>Quote's lessons.</p>							|
 | date			| 			|  <p>Quote's date.</p>							|
+| user			| 			|  <p>Quote's user.</p>							|
 
 # Sermon
 

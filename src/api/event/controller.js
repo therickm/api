@@ -4,7 +4,7 @@ import { Event } from '.'
 export const create = ({ bodymen: { body } }, res, next) =>
   Event.create(body)
     .then((event) => event.view(true))
-    .then(success(res, 201))
+    .then(success(res, body, 201))
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
