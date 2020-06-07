@@ -19,9 +19,6 @@ export const churchSearch = ({ params }, res, next) =>
     { score: { $meta: "church" } }
   )
     .sort({ score: { $meta: 'church' } })
-    .exec(function (err, results) {
-      // callback
-    })
     .then(notFound(res))
     .then((user) => user ? user.view() : null)
     .then(success(res))
