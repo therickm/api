@@ -14,11 +14,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .catch(next)
 
 export const churchSearch = ({ params }, res, next) =>
-  User.find(
-    { $text: { $search: params.q } },
-    { score: { $meta: "church" } }
-  )
-    .sort({ score: { $meta: 'church' } })
+  User.findById(params.id)
     .then(notFound(res))
     .then((user) => user ? user.view() : null)
     .then(success(res))
