@@ -4,6 +4,10 @@
 	"main": "src",
 	"private": true,
 	"homepage": "./",
+	"engines": {
+		"node": "14.4.0",
+		"npm": "6.14.5"
+	},
 	"scripts": {
 		"start": "node .",
 		"test": "jest",
@@ -17,9 +21,7 @@
 	},
 	"jest": {
 		"testEnvironment": "node",
-		"setupFilesAfterEnv": [
-			"<rootDir>/test/setup.js"
-		]
+		"setupFilesAfterEnv": [ "<rootDir>/test/setup.js" ]
 	},
 	"devDependencies": {
 		"apidoc": "^0.20.0",
