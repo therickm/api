@@ -14,9 +14,21 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .catch(next)
 
 export const churchSearch = ({ params }, res, next) =>
-  User.findById(params.id)
+  User.find(
+    {
+      $or: [
+        {
+          church: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          name: { '$regex': params.q, '$options': 'i' }
+        }
+      ]
+    }
+    , 'name email church phone createdAt'
+  )
     .then(notFound(res))
-    .then((user) => user ? user.view() : null)
+    // .then((user) => user ? user.view() : null)
     .then(success(res))
     .catch(next)
 
@@ -71,6 +83,14 @@ export const update = ({ bodymen: { body }, params, user }, res, next) =>
     .then(success(res))
     .catch(next)
 
+export const follow = (req, res, next) => {
+  User.findById(req.params.id === 'me' ? user.id : req.params.id)
+    .then(notFound(res))
+    .then((user) => user ? Object.assign(user, { followers: [...user.followers, req.body.user] }).save() : null)
+    .then((user) => user ? user.view(true) : null)
+    .then(success(res))
+    .catch(next)
+}
 export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =>
   User.findById(params.id === 'me' ? user.id : params.id)
     .then(notFound(res))

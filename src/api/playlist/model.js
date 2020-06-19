@@ -8,7 +8,7 @@ const playlistSchema = new Schema({
     type: String
   },
   user: {
-    type: String
+    type: Object
   }
 }, {
   timestamps: true,
@@ -19,7 +19,7 @@ const playlistSchema = new Schema({
 })
 
 playlistSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,

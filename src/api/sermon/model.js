@@ -23,7 +23,7 @@ const sermonSchema = new Schema({
     type: String
   },
   user: {
-    type: String
+    type: Object
   }
 }, {
   timestamps: true,
@@ -34,7 +34,7 @@ const sermonSchema = new Schema({
 })
 
 sermonSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,

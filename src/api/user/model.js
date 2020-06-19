@@ -48,6 +48,10 @@ const userSchema = new Schema({
   picture: {
     type: String,
     trim: true
+  },
+  followers: {
+    type: Array,
+    default: []
   }
 }, {
   timestamps: true
@@ -81,7 +85,7 @@ userSchema.pre('save', function (next) {
 userSchema.methods = {
   view(full) {
     const view = {}
-    let fields = ['id', 'name', 'picture', 'phone', 'church']
+    let fields = ['id', 'name', 'picture', 'phone', 'church', 'followers']
 
     if (full) {
       fields = [...fields, 'email', 'createdAt']

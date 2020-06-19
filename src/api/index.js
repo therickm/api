@@ -42,8 +42,6 @@ router.use('/events', event)
 router.use('/playlists', playlist)
 router.use('/sermons', sermon)
 router.use('/quotes', quote)
-router.get('/search/:q',
-    churchSearch)
 
 
 export default router

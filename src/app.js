@@ -17,10 +17,8 @@ const msg = {
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 };
 // alert('sending...')
-console.log('sending message ', process.env.SENDGRID_KEY);
 
 sgMail.send(msg).then(() => {
-  console.log('Message sent')
 }).catch((error) => {
   console.log(error.response.body)
   // console.log(error.response.body.errors[0].message)

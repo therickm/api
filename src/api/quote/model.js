@@ -14,7 +14,7 @@ const quoteSchema = new Schema({
     type: String
   },
   user: {
-    type: String
+    type: Object
   }
 }, {
   timestamps: true,
@@ -25,7 +25,7 @@ const quoteSchema = new Schema({
 })
 
 quoteSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,

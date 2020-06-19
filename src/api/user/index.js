@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { password as passwordAuth, master, token } from '../../services/passport'
-import { index, showMe, show, create, update, updatePassword, destroy, churchSearch } from './controller'
+import { index, showMe, show, create, update, updatePassword, destroy, churchSearch, follow } from './controller'
 import { schema } from './model'
 export User, { schema } from './model'
 
@@ -61,8 +61,17 @@ router.get('/:id',
 * @apiSuccess {Object} user User's data.
 * @apiError 404 User not found.
 */
-router.get('/:id/q',
-  show)
+router.get('/search/:q', churchSearch)
+
+/**
+* @api {update} /users/:q Search Churches/users
+* @apiName Churches/users
+* @apiGroup Churches
+* @apiPermission public
+* @apiSuccess {Object} user User's data.
+* @apiError 404 User not found.
+*/
+router.put('/follow/:id', follow)
 /**
  * @api {post} /users Create user
  * @apiName CreateUser

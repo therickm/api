@@ -17,7 +17,7 @@ const cellSchema = new Schema({
     type: String
   },
   user: {
-    type: String
+    type: Object
   }
 }, {
   timestamps: true,
@@ -28,7 +28,7 @@ const cellSchema = new Schema({
 })
 
 cellSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
