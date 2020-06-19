@@ -72,6 +72,7 @@ router.get('/search/:q', churchSearch)
 * @apiError 404 User not found.
 */
 router.put('/follow/:id', follow)
+
 /**
  * @api {post} /users Create user
  * @apiName CreateUser
