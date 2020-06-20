@@ -61,8 +61,18 @@ router.get('/:id',
 * @apiSuccess {Object} user User's data.
 * @apiError 404 User not found.
 */
-router.get('/:id/q',
-  show)
+router.get('/search/:q', churchSearch)
+
+/**
+* @api {update} /users/:q Search Churches/users
+* @apiName Churches/users
+* @apiGroup Churches
+* @apiPermission public
+* @apiSuccess {Object} user User's data.
+* @apiError 404 User not found.
+*/
+router.put('/follow/:id', follow)
+
 /**
  * @api {post} /users Create user
  * @apiName CreateUser
