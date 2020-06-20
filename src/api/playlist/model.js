@@ -8,7 +8,7 @@ const playlistSchema = new Schema({
     type: String
   },
   user: {
-    type: String
+    type: Object
   }
 }, {
   timestamps: true,
