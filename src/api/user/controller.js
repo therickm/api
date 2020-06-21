@@ -35,7 +35,7 @@ export const churchSearch = ({ params }, res, next) =>
     export const follow = (req, res, next) => {
   User.findById(req.params.id === 'me' ? user.id : req.params.id)
     .then(notFound(res))
-    .then((user) => user ? Object.assign(user, { followers: [...user.followers, JSON.parse(req.body)] }).save() : null)
+    .then((user) => user ? Object.assign(user, { followers: [...user.followers, {id:JSON.parse(req.body.userId),name:JSON.parse(req.body.userName)}] }).save() : null)
     .then((user) => user ? user.view(true) : null)
     .then(success(res))
     .catch(next)
