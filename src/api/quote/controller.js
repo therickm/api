@@ -1,5 +1,7 @@
 import { success, notFound } from '../../services/response/'
 import { Quote } from '.'
+import { all } from '../user/controller';
+
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Quote.create(body)
@@ -17,6 +19,23 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     )
     .then(success(res))
     .catch(next)
+
+
+export const followed = ({ params }, res, next) => {
+  let c = []
+  all().then(res => {
+    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+  })
+    .then(count => Quote.find({})
+      .then((quotes) => {
+        return quotes.filter(item => item.user && c.includes(item.user.id)).map((quote) => quote.view())
+      }
+      )
+    )
+    .then(success(res))
+    .catch(next)
+}
+
 
 export const show = ({ params }, res, next) =>
   Quote.findById(params.id)

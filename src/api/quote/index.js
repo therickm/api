@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, update, destroy, followed } from './controller'
 import { schema } from './model'
 export Quote, { schema } from './model'
 
@@ -34,6 +34,7 @@ router.post('/',
  * @apiSuccess {Object[]} rows List of quotes.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
+
 router.get('/',
   query(),
   index)
@@ -75,5 +76,16 @@ router.put('/:id',
  */
 router.delete('/:id',
   destroy)
+
+/**
+* @api {get} /followed/:client Quotes From Churches Followed
+* @apiName Churches Followed
+* @apiGroup Quote
+* @apiSuccess (Success 204) 204 No Content.
+* @apiError 404 Quote not found.
+*/
+router.get('/followed/:client',
+  query(),
+  followed)
 
 export default router

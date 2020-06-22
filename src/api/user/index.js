@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { password as passwordAuth, master, token } from '../../services/passport'
-import { index, showMe, show, create, update, updatePassword, destroy, churchSearch, follow } from './controller'
+import { index, showMe, show, create, update, updatePassword, destroy, churchSearch, follow, unfollow, following } from './controller'
 import { schema } from './model'
 export User, { schema } from './model'
 
@@ -12,7 +12,7 @@ const { email, password, name, picture, role, church, phone, status } = schema.t
 /**
  * @api {get} /users Retrieve users
  * @apiName RetrieveUsers
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission admin
  * @apiParam {String} access_token User access_token.
  * @apiUse listParams
@@ -21,18 +21,13 @@ const { email, password, name, picture, role, church, phone, status } = schema.t
  * @apiError 401 Admin access only.
  */
 
-// router.get('/',
-//   token({ required: true }),
-//   query(),
-//   index)
-
 router.get('/',
   query(),
   index)
 /**
  * @api {get} /users/me Retrieve current user
  * @apiName RetrieveCurrentUser
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission user
  * @apiParam {String} access_token User access_token.
  * @apiSuccess {Object} user User's data.
@@ -44,17 +39,16 @@ router.get('/me',
 /**
  * @api {get} /users/:id Retrieve user
  * @apiName RetrieveUser
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission public
  * @apiSuccess {Object} user User's data.
  * @apiError 404 User not found.
  */
 router.get('/:id',
   show)
-// try saerch
 
 /**
-* @api {get} /users/:q Search Churches/users
+* @api {get} /users/:q Search Churches
 * @apiName Churches/users
 * @apiGroup Churches
 * @apiPermission public
@@ -64,19 +58,31 @@ router.get('/:id',
 router.get('/search/:q', churchSearch)
 
 /**
-* @api {update} /users/:q Search Churches/users
-* @apiName Churches/users
+* @api {put} /follow/:id Follow Church
+* @apiName followChurch
 * @apiGroup Churches
 * @apiPermission public
+* @apiParam {String} user (client id from app).
 * @apiSuccess {Object} user User's data.
 * @apiError 404 User not found.
 */
 router.put('/follow/:id', follow)
 
 /**
+* @api {put} /unfollow/:id Unfollow Church 
+* @apiName unfollowChurches
+* @apiGroup Churches
+* @apiPermission public
+* @apiParam {String} client (client id from app).
+* @apiSuccess {Object} user User's data.
+* @apiError 404 User not found.
+*/
+router.put('/unfollow/:id', unfollow)
+
+/**
  * @api {post} /users Create user
  * @apiName CreateUser
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission master
  * @apiParam {String} access_token Master access_token.
  * @apiParam {String} email User's email.
@@ -97,7 +103,7 @@ router.post('/',
 /**
  * @api {put} /users/:id Update user
  * @apiName UpdateUser
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission user
  * @apiParam {String} access_token User access_token.
  * @apiParam {String} [name] User's name.
@@ -115,7 +121,7 @@ router.put('/:id',
 /**
  * @api {put} /users/:id/password Update password
  * @apiName UpdatePassword
- * @apiGroup User
+ * @apiGroup Churches
  * @apiHeader {String} Authorization Basic authorization with email and password.
  * @apiParam {String{6..}} password User's new password.
  * @apiSuccess (Success 201) {Object} user User's data.
@@ -131,7 +137,7 @@ router.put('/:id/password',
 /**
  * @api {delete} /users/:id Delete user
  * @apiName DeleteUser
- * @apiGroup User
+ * @apiGroup Churches
  * @apiPermission admin
  * @apiParam {String} access_token User access_token.
  * @apiSuccess (Success 204) 204 No Content.
@@ -141,5 +147,16 @@ router.put('/:id/password',
 router.delete('/:id',
   token({ required: true, roles: ['admin'] }),
   destroy)
+
+/**
+* @api {put} /following/:client Churches Followed
+* @apiName ChurchesFollowed
+* @apiGroup Churches
+* @apiPermission public
+* @apiSuccess {Object} user User's data.
+* @apiError 404 User not found.
+*/
+router.get('/following/:client',
+  following)
 
 export default router

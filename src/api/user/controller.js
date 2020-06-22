@@ -13,6 +13,14 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .then(success(res))
     .catch(next)
 
+export const followed = () => {
+  // Helper(index,)
+}
+
+export const all = () =>
+  User.find({}, 'id followers')
+
+
 export const churchSearch = ({ params }, res, next) =>
   User.find(
     {
@@ -32,15 +40,32 @@ export const churchSearch = ({ params }, res, next) =>
     .then(success(res))
     .catch(next)
 
-    export const follow = (req, res, next) => {
+export const follow = (req, res, next) => {
   User.findById(req.params.id === 'me' ? user.id : req.params.id)
     .then(notFound(res))
-    .then((user) => user ? Object.assign(user, { followers: [...user.followers, JSON.parse(req.body.user)] }).save() : null)
+    .then((user) => user ? Object.assign(user, { followers: [...user.followers, req.body.user] }).save() : null)
     .then((user) => user ? user.view(true) : null)
     .then(success(res))
     .catch(next)
 }
+export const unfollow = (req, res, next) => {
+  User.findById(req.params.id === 'me' ? user.id : req.params.id)
+    .then(notFound(res))
+    .then((user) => {
+      if (user) {
+        let newArray = user.followers
+        var index = newArray.indexOf(req.body.user);
+        if (index !== -1) newArray.splice(index, 1)
+        return Object.assign(user, { followers: newArray }).save()
+      } else {
+        return null
+      }
 
+    })
+    .then((user) => user ? user.view(true) : null)
+    .then(success(res))
+    .catch(next)
+}
 export const show = ({ params }, res, next) =>
   User.findById(params.id)
     .then(notFound(res))
@@ -119,3 +144,7 @@ export const destroy = ({ params }, res, next) =>
     .then((user) => user ? user.remove() : null)
     .then(success(res, 204))
     .catch(next)
+
+export const following = ({ params }, res, next) =>
+  all()
+    .then(res => res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)))

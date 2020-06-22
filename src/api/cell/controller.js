@@ -1,5 +1,6 @@
 import { success, notFound } from '../../services/response/'
 import { Cell } from '.'
+import { all } from '../user/controller'
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Cell.create(body)
@@ -39,3 +40,18 @@ export const destroy = ({ params }, res, next) =>
     .then((cell) => cell ? cell.remove() : null)
     .then(success(res, 204))
     .catch(next)
+
+export const followed = ({ params }, res, next) => {
+  let c = []
+  all().then(res => {
+    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+  })
+    .then(count => Cell.find({})
+      .then((cells) => {
+        return cells.filter(item => item.user && c.includes(item.user.id)).map((cell) => cell.view())
+      }
+      )
+    )
+    .then(success(res))
+    .catch(next)
+}

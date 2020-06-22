@@ -26,7 +26,7 @@ const config = {
     env: process.env.NODE_ENV || 'development',
     root: path.join(__dirname, '..'),
     port: process.env.PORT || 9000,
-    ip: process.env.IP || '0.0.0.0',
+    ip: process.env.IP || 'localhost',
     apiRoot: process.env.API_ROOT || '',
     defaultEmail: 'it@madrachi.ug',
     sendgridKey: requireProcessEnv('SENDGRID_KEY'),
@@ -43,7 +43,7 @@ const config = {
   test: {},
   development: {
     mongo: {
-      uri: 'mongodb://localhost/prayista-dev',
+      uri: 'mongodb://heroku_wvl4zd6w:648h085upqp9j09dhf287ibq0s@ds229373.mlab.com:29373/heroku_wvl4zd6w',
       options: {
         debug: true
       }

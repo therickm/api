@@ -6,13 +6,28 @@
 	- [Authenticate](#authenticate)
 	
 - [Cell](#cell)
+	- [Cells From Churches Followed](#cells-from-churches-followed)
 	- [Create cell](#create-cell)
 	- [Delete cell](#delete-cell)
 	- [Retrieve cell](#retrieve-cell)
 	- [Retrieve cells](#retrieve-cells)
 	- [Update cell](#update-cell)
 	
+- [Churches](#churches)
+	- [Search Churches](#search-churches)
+	- [Churches Followed](#churches-followed)
+	- [Create user](#create-user)
+	- [Delete user](#delete-user)
+	- [Retrieve current user](#retrieve-current-user)
+	- [Retrieve user](#retrieve-user)
+	- [Retrieve users](#retrieve-users)
+	- [Update password](#update-password)
+	- [Update user](#update-user)
+	- [Follow Church](#follow-church)
+	- [Unfollow Church](#unfollow-church)
+	
 - [Event](#event)
+	- [Events From Churches Followed](#events-from-churches-followed)
 	- [Create event](#create-event)
 	- [Delete event](#delete-event)
 	- [Retrieve event](#retrieve-event)
@@ -25,6 +40,7 @@
 	- [Verify token](#verify-token)
 	
 - [Playlist](#playlist)
+	- [Playlists From Churches Followed](#playlists-from-churches-followed)
 	- [Create playlist](#create-playlist)
 	- [Delete playlist](#delete-playlist)
 	- [Retrieve playlist](#retrieve-playlist)
@@ -32,6 +48,7 @@
 	- [Update playlist](#update-playlist)
 	
 - [Quote](#quote)
+	- [Quotes From Churches Followed](#quotes-from-churches-followed)
 	- [Create quote](#create-quote)
 	- [Delete quote](#delete-quote)
 	- [Retrieve quote](#retrieve-quote)
@@ -39,20 +56,12 @@
 	- [Update quote](#update-quote)
 	
 - [Sermon](#sermon)
+	- [Sermons From Churches Followed](#sermons-from-churches-followed)
 	- [Create sermon](#create-sermon)
 	- [Delete sermon](#delete-sermon)
 	- [Retrieve sermon](#retrieve-sermon)
 	- [Retrieve sermons](#retrieve-sermons)
 	- [Update sermon](#update-sermon)
-	
-- [User](#user)
-	- [Create user](#create-user)
-	- [Delete user](#delete-user)
-	- [Retrieve current user](#retrieve-current-user)
-	- [Retrieve user](#retrieve-user)
-	- [Retrieve users](#retrieve-users)
-	- [Update password](#update-password)
-	- [Update user](#update-user)
 	
 
 
@@ -77,6 +86,13 @@
 | access_token			| String			|  <p>Master access_token.</p>							|
 
 # Cell
+
+## Cells From Churches Followed
+
+
+
+	GET /followed/:client
+
 
 ## Create cell
 
@@ -145,7 +161,158 @@
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
 
+# Churches
+
+## Search Churches
+
+
+
+	GET /users/:q
+
+
+## Churches Followed
+
+
+
+	PUT /following/:client
+
+
+## Create user
+
+
+
+	POST /users
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>Master access_token.</p>							|
+| email			| String			|  <p>User's email.</p>							|
+| password			| String			|  <p>User's password.</p>							|
+| name			| String			| **optional** <p>User's name.</p>							|
+| picture			| String			| **optional** <p>User's picture.</p>							|
+| role			| String			| **optional** <p>User's role.</p>							|
+
+## Delete user
+
+
+
+	DELETE /users/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+
+## Retrieve current user
+
+
+
+	GET /users/me
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+
+## Retrieve user
+
+
+
+	GET /users/:id
+
+
+## Retrieve users
+
+
+
+	GET /users
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+| q			| String			| **optional** <p>Query to search.</p>							|
+| page			| Number			| **optional** <p>Page number.</p>							|
+| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
+| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
+| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
+
+## Update password
+
+
+
+	PUT /users/:id/password
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>Basic authorization with email and password.</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| password			| String			|  <p>User's new password.</p>							|
+
+## Update user
+
+
+
+	PUT /users/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>User access_token.</p>							|
+| name			| String			| **optional** <p>User's name.</p>							|
+| picture			| String			| **optional** <p>User's picture.</p>							|
+
+## Follow Church
+
+
+
+	PUT /follow/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| user			| String			|  <p>(client id from app).</p>							|
+
+## Unfollow Church
+
+
+
+	PUT /unfollow/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| client			| String			|  <p>(client id from app).</p>							|
+
 # Event
+
+## Events From Churches Followed
+
+
+
+	GET /followed/:client
+
 
 ## Create event
 
@@ -256,6 +423,13 @@
 
 # Playlist
 
+## Playlists From Churches Followed
+
+
+
+	GET /followed/:client
+
+
 ## Create playlist
 
 
@@ -318,6 +492,13 @@
 | user			| 			|  <p>Playlist's user.</p>							|
 
 # Quote
+
+## Quotes From Churches Followed
+
+
+
+	GET /followed/:client
+
 
 ## Create quote
 
@@ -385,6 +566,13 @@
 | user			| 			|  <p>Quote's user.</p>							|
 
 # Sermon
+
+## Sermons From Churches Followed
+
+
+
+	GET /followed/:client
+
 
 ## Create sermon
 
@@ -456,109 +644,5 @@
 | customFile			| 			|  <p>Sermon's customFile.</p>							|
 | messages			| 			|  <p>Sermon's messages.</p>							|
 | user			| 			|  <p>Sermon's user.</p>							|
-
-# User
-
-## Create user
-
-
-
-	POST /users
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>Master access_token.</p>							|
-| email			| String			|  <p>User's email.</p>							|
-| password			| String			|  <p>User's password.</p>							|
-| name			| String			| **optional** <p>User's name.</p>							|
-| picture			| String			| **optional** <p>User's picture.</p>							|
-| role			| String			| **optional** <p>User's role.</p>							|
-
-## Delete user
-
-
-
-	DELETE /users/:id
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
-
-## Retrieve current user
-
-
-
-	GET /users/me
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
-
-## Retrieve user
-
-
-
-	GET /users/:id
-
-
-## Retrieve users
-
-
-
-	GET /users
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
-
-## Update password
-
-
-
-	PUT /users/:id/password
-
-### Headers
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>Basic authorization with email and password.</p>							|
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| password			| String			|  <p>User's new password.</p>							|
-
-## Update user
-
-
-
-	PUT /users/:id
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
-| name			| String			| **optional** <p>User's name.</p>							|
-| picture			| String			| **optional** <p>User's picture.</p>							|
 
 
