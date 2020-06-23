@@ -5,7 +5,7 @@
 	"private": true,
 	"homepage": "./",
 	"scripts": {
-		"start": "node index.js",
+		"start": "node .",
 		"test": "jest",
 		"coverage": "npm test -- --coverage",
 		"postcoverage": "opn coverage/lcov-report/index.html",
