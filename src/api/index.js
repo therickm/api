@@ -42,5 +42,7 @@ router.use('/playlists', playlist)
 router.use('/sermons', sermon)
 router.use('/quotes', quote)
 
+console.log('in index');
+
 
 export default router
