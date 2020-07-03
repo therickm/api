@@ -3,7 +3,7 @@ import { Event } from '.'
 let event
 
 beforeEach(async () => {
-  event = await Event.create({ name: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', customFile: 'test', description: 'test', user: 'test' })
+  event = await Event.create({ name: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', image: 'test', description: 'test', user: 'test' })
 })
 
 describe('view', () => {
@@ -16,7 +16,7 @@ describe('view', () => {
     expect(view.time).toBe(event.time)
     expect(view.date).toBe(event.date)
     expect(view.hashtags).toBe(event.hashtags)
-    expect(view.customFile).toBe(event.customFile)
+    expect(view.image).toBe(event.image)
     expect(view.description).toBe(event.description)
     expect(view.user).toBe(event.user)
     expect(view.createdAt).toBeTruthy()
@@ -32,7 +32,7 @@ describe('view', () => {
     expect(view.time).toBe(event.time)
     expect(view.date).toBe(event.date)
     expect(view.hashtags).toBe(event.hashtags)
-    expect(view.customFile).toBe(event.customFile)
+    expect(view.image).toBe(event.image)
     expect(view.description).toBe(event.description)
     expect(view.user).toBe(event.user)
     expect(view.createdAt).toBeTruthy()

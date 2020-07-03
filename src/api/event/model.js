@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   hashtags: {
     type: String
   },
-  customFile: {
+  image: {
     type: String
   },
   description: {
@@ -43,7 +43,7 @@ eventSchema.methods = {
       time: this.time,
       date: this.date,
       hashtags: this.hashtags,
-      customFile: this.customFile,
+      image: this.image,
       description: this.description,
       user: this.user,
       createdAt: this.createdAt,

@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, update, destroy, followed, search } from './controller'
 import { schema } from './model'
 export Event, { schema } from './model'
 
 const router = new Router()
-const { name, location, time, date, hashtags, customFile, description, user } = schema.tree
+const { name, location, time, date, hashtags, image, description, user } = schema.tree
 
 /**
  * @api {post} /events Create event
@@ -17,7 +17,7 @@ const { name, location, time, date, hashtags, customFile, description, user } = 
  * @apiParam time Event's time.
  * @apiParam date Event's date.
  * @apiParam hashtags Event's hashtags.
- * @apiParam customFile Event's customFile.
+ * @apiParam image Event's image.
  * @apiParam description Event's description.
  * @apiParam user Event's user.
  * @apiSuccess {Object} event Event's data.
@@ -25,7 +25,7 @@ const { name, location, time, date, hashtags, customFile, description, user } = 
  * @apiError 404 Event not found.
  */
 router.post('/',
-  body({ name, location, time, date, hashtags, customFile, description, user }),
+  body({ name, location, time, date, hashtags, image, description, user }),
   create)
 
 /**
@@ -52,6 +52,19 @@ router.get('/',
 router.get('/:id',
   show)
 
+
+  /**
+ * @api {get} /events/search/:q Event search
+ * @apiName RetrieveEvent
+ * @apiGroup Event
+ * @apiSuccess {Object} event Event's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Event not found.
+ */
+router.get('/search/:q',
+search)
+
+
 /**
  * @api {put} /events/:id Update event
  * @apiName UpdateEvent
@@ -61,7 +74,7 @@ router.get('/:id',
  * @apiParam time Event's time.
  * @apiParam date Event's date.
  * @apiParam hashtags Event's hashtags.
- * @apiParam customFile Event's customFile.
+ * @apiParam image Event's image.
  * @apiParam description Event's description.
  * @apiParam user Event's user.
  * @apiSuccess {Object} event Event's data.
@@ -69,7 +82,7 @@ router.get('/:id',
  * @apiError 404 Event not found.
  */
 router.put('/:id',
-  body({ name, location, time, date, hashtags, customFile, description, user }),
+  body({ name, location, time, date, hashtags, image, description, user }),
   update)
 
 /**
@@ -81,5 +94,16 @@ router.put('/:id',
  */
 router.delete('/:id',
   destroy)
+
+/**
+* @api {get} /followed/:client Events From Churches Followed
+* @apiName Churches Followed
+* @apiGroup Event
+* @apiSuccess (Success 204) 204 No Content.
+* @apiError 404 Event not found.
+*/
+router.get('/followed/:client',
+  query(),
+  followed)
 
 export default router

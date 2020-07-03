@@ -7,7 +7,6 @@ import event from './event'
 import playlist from './playlist'
 import sermon from './sermon'
 import quote from './quote'
-import { churchSearch } from './user/controller'
 
 const router = new Router()
 
@@ -42,6 +41,8 @@ router.use('/events', event)
 router.use('/playlists', playlist)
 router.use('/sermons', sermon)
 router.use('/quotes', quote)
+
+console.log('in index');
 
 
 export default router

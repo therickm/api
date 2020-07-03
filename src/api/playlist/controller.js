@@ -1,6 +1,6 @@
 import { success, notFound } from '../../services/response/'
 import { Playlist } from '.'
-
+import { all } from '../user/controller'
 export const create = ({ bodymen: { body } }, res, next) =>
   Playlist.create(body)
     .then((playlist) => playlist.view(true))
@@ -39,3 +39,18 @@ export const destroy = ({ params }, res, next) =>
     .then((playlist) => playlist ? playlist.remove() : null)
     .then(success(res, 204))
     .catch(next)
+
+export const followed = ({ params }, res, next) => {
+  let c = []
+  all().then(res => {
+    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+  })
+    .then(count => Playlist.find({})
+      .then((playlists) => {
+        return playlists.filter(item => item.user && c.includes(item.user.id)).map((playlist) => playlist.view())
+      }
+      )
+    )
+    .then(success(res))
+    .catch(next)
+}

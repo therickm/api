@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, update, destroy, followed } from './controller'
 import { schema } from './model'
 export Cell, { schema } from './model'
 
@@ -77,5 +77,17 @@ router.put('/:id',
  */
 router.delete('/:id',
   destroy)
+
+/**
+* @api {get} /followed/:client Cells From Churches Followed
+* @apiName Churches Followed
+* @apiGroup Cell
+* @apiSuccess {Object} cell Cell's data.
+* @apiError 404 Cell not found.
+*/
+
+router.get('/followed/:client',
+  query(),
+  followed)
 
 export default router

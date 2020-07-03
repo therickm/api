@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, update, destroy, followed } from './controller'
 import { schema } from './model'
 export Playlist, { schema } from './model'
 
@@ -71,5 +71,16 @@ router.put('/:id',
  */
 router.delete('/:id',
   destroy)
+
+/**
+* @api {get} /followed/:client Playlists From Churches Followed
+* @apiName Churches Followed
+* @apiGroup Playlist
+* @apiSuccess (Success 204) 204 No Content.
+* @apiError 404 Playlist not found.
+*/
+router.get('/followed/:client',
+  query(),
+  followed)
 
 export default router

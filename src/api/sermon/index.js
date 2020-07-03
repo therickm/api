@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, update, destroy, followed } from './controller'
 import { schema } from './model'
 export Sermon, { schema } from './model'
 
 const router = new Router()
-const { title, location, time, date, hashtags, customFile, messages, user } = schema.tree
+const { title, location, time, date, hashtags, image, messages, user } = schema.tree
 
 /**
  * @api {post} /sermons Create sermon
@@ -17,7 +17,7 @@ const { title, location, time, date, hashtags, customFile, messages, user } = sc
  * @apiParam time Sermon's time.
  * @apiParam date Sermon's date.
  * @apiParam hashtags Sermon's hashtags.
- * @apiParam customFile Sermon's customFile.
+ * @apiParam image Sermon's image.
  * @apiParam messages Sermon's messages.
  * @apiParam user Sermon's user.
  * @apiSuccess {Object} sermon Sermon's data.
@@ -25,7 +25,7 @@ const { title, location, time, date, hashtags, customFile, messages, user } = sc
  * @apiError 404 Sermon not found.
  */
 router.post('/',
-  body({ title, location, time, date, hashtags, customFile, messages, user }),
+  body({ title, location, time, date, hashtags, image, messages, user }),
   create)
 
 /**
@@ -61,7 +61,7 @@ router.get('/:id',
  * @apiParam time Sermon's time.
  * @apiParam date Sermon's date.
  * @apiParam hashtags Sermon's hashtags.
- * @apiParam customFile Sermon's customFile.
+ * @apiParam image Sermon's image.
  * @apiParam messages Sermon's messages.
  * @apiParam user Sermon's user.
  * @apiSuccess {Object} sermon Sermon's data.
@@ -69,7 +69,7 @@ router.get('/:id',
  * @apiError 404 Sermon not found.
  */
 router.put('/:id',
-  body({ title, location, time, date, hashtags, customFile, messages, user }),
+  body({ title, location, time, date, hashtags, image, messages, user }),
   update)
 
 /**
@@ -81,5 +81,16 @@ router.put('/:id',
  */
 router.delete('/:id',
   destroy)
+
+/**
+* @api {get} /followed/:client Sermons From Churches Followed
+* @apiName Churches Followed
+* @apiGroup Sermon
+* @apiSuccess (Success 204) 204 No Content.
+* @apiError 404 Sermon not found.
+*/
+router.get('/followed/:client',
+  query(),
+  followed)
 
 export default router

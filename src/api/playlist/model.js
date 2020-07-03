@@ -19,7 +19,7 @@ const playlistSchema = new Schema({
 })
 
 playlistSchema.methods = {
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,

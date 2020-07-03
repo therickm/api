@@ -3,7 +3,7 @@ import { Sermon } from '.'
 let sermon
 
 beforeEach(async () => {
-  sermon = await Sermon.create({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', customFile: 'test', messages: 'test', user: 'test' })
+  sermon = await Sermon.create({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', image: 'test', messages: 'test', user: 'test' })
 })
 
 describe('view', () => {
@@ -16,7 +16,7 @@ describe('view', () => {
     expect(view.time).toBe(sermon.time)
     expect(view.date).toBe(sermon.date)
     expect(view.hashtags).toBe(sermon.hashtags)
-    expect(view.customFile).toBe(sermon.customFile)
+    expect(view.image).toBe(sermon.image)
     expect(view.messages).toBe(sermon.messages)
     expect(view.user).toBe(sermon.user)
     expect(view.createdAt).toBeTruthy()
@@ -32,7 +32,7 @@ describe('view', () => {
     expect(view.time).toBe(sermon.time)
     expect(view.date).toBe(sermon.date)
     expect(view.hashtags).toBe(sermon.hashtags)
-    expect(view.customFile).toBe(sermon.customFile)
+    expect(view.image).toBe(sermon.image)
     expect(view.messages).toBe(sermon.messages)
     expect(view.user).toBe(sermon.user)
     expect(view.createdAt).toBeTruthy()

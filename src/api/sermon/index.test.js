@@ -14,7 +14,7 @@ beforeEach(async () => {
 test('POST /sermons 201', async () => {
   const { status, body } = await request(app())
     .post(`${apiRoot}`)
-    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', customFile: 'test', messages: 'test', user: 'test' })
+    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', image: 'test', messages: 'test', user: 'test' })
   expect(status).toBe(201)
   expect(typeof body).toEqual('object')
   expect(body.title).toEqual('test')
@@ -22,7 +22,7 @@ test('POST /sermons 201', async () => {
   expect(body.time).toEqual('test')
   expect(body.date).toEqual('test')
   expect(body.hashtags).toEqual('test')
-  expect(body.customFile).toEqual('test')
+  expect(body.image).toEqual('test')
   expect(body.messages).toEqual('test')
   expect(body.user).toEqual('test')
 })
@@ -52,7 +52,7 @@ test('GET /sermons/:id 404', async () => {
 test('PUT /sermons/:id 200', async () => {
   const { status, body } = await request(app())
     .put(`${apiRoot}/${sermon.id}`)
-    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', customFile: 'test', messages: 'test', user: 'test' })
+    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', image: 'test', messages: 'test', user: 'test' })
   expect(status).toBe(200)
   expect(typeof body).toEqual('object')
   expect(body.id).toEqual(sermon.id)
@@ -61,7 +61,7 @@ test('PUT /sermons/:id 200', async () => {
   expect(body.time).toEqual('test')
   expect(body.date).toEqual('test')
   expect(body.hashtags).toEqual('test')
-  expect(body.customFile).toEqual('test')
+  expect(body.image).toEqual('test')
   expect(body.messages).toEqual('test')
   expect(body.user).toEqual('test')
 })
@@ -69,7 +69,7 @@ test('PUT /sermons/:id 200', async () => {
 test('PUT /sermons/:id 404', async () => {
   const { status } = await request(app())
     .put(apiRoot + '/123456789098765432123456')
-    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', customFile: 'test', messages: 'test', user: 'test' })
+    .send({ title: 'test', location: 'test', time: 'test', date: 'test', hashtags: 'test', image: 'test', messages: 'test', user: 'test' })
   expect(status).toBe(404)
 })
 

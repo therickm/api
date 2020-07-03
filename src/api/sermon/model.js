@@ -16,7 +16,7 @@ const sermonSchema = new Schema({
   hashtags: {
     type: String
   },
-  customFile: {
+  image: {
     type: String
   },
   messages: {
@@ -34,7 +34,7 @@ const sermonSchema = new Schema({
 })
 
 sermonSchema.methods = {
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,
@@ -43,7 +43,7 @@ sermonSchema.methods = {
       time: this.time,
       date: this.date,
       hashtags: this.hashtags,
-      customFile: this.customFile,
+      image: this.image,
       messages: this.messages,
       user: this.user,
       createdAt: this.createdAt,

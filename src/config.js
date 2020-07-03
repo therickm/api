@@ -3,6 +3,7 @@ import path from 'path'
 import merge from 'lodash/merge'
 
 /* istanbul ignore next */
+console.log('pr', process.env);
 
 const requireProcessEnv = (name) => {
   if (!process.env[name]) {
@@ -26,6 +27,7 @@ const config = {
     root: path.join(__dirname, '..'),
     port: process.env.PORT || 9000,
     ip: process.env.IP || 'localhost',
+    // ip: process.env.IP || '0.0.0.0',
     apiRoot: process.env.API_ROOT || '',
     defaultEmail: 'it@madrachi.ug',
     sendgridKey: requireProcessEnv('SENDGRID_KEY'),

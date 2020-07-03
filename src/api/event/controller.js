@@ -1,5 +1,6 @@
 import { success, notFound } from '../../services/response/'
 import { Event } from '.'
+import { all } from '../user/controller'
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Event.create(body)
@@ -38,4 +39,51 @@ export const destroy = ({ params }, res, next) =>
     .then(notFound(res))
     .then((event) => event ? event.remove() : null)
     .then(success(res, 204))
+    .catch(next)
+
+export const followed = ({ params }, res, next) => {
+  let c = []
+  all().then(res => {
+    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+  })
+    .then(count => Event.find({})
+      .then((events) => {
+        return events.filter(item => item.user && c.includes(item.user.id)).map((event) => event.view())
+      }
+      )
+    )
+    .then(success(res))
+    .catch(next)
+}
+
+
+
+export const search = ({ params }, res, next) =>
+Event.find(
+    {
+      $or: [
+        {
+          name: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          location: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          description: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          hashtags: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          'user.name': { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          'user.church': { '$regex': params.q, '$options': 'i' }
+        }
+      ]
+    }
+  )
+    .then(notFound(res))
+    .then((events) => events.map((event) => event.view()))
+    .then(success(res))
     .catch(next)

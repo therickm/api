@@ -7,22 +7,24 @@ import api from './api'
 const app = express(apiRoot, api)
 const server = http.createServer(app)
 
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_KEY);
-const msg = {
-  to: 'mudalit@gmail.com',
-  from: 'it@madrachi.ug',
-  subject: 'Sending with Twilio SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-// alert('sending...')
+// const sgMail = require('@sendgrid/mail');
+// sgMail.setApiKey(process.env.SENDGRID_KEY);
+// const msg = {
+//   to: 'mudalit@gmail.com',
+//   from: 'it@madrachi.ug',
+//   subject: 'Sending with Twilio SendGrid is Fun',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// };
+// // alert('sending...')
+// console.log('sending message ', process.env.SENDGRID_KEY);
 
-sgMail.send(msg).then(() => {
-}).catch((error) => {
-  console.log(error.response.body)
-  // console.log(error.response.body.errors[0].message)
-})
+// sgMail.send(msg).then(() => {
+//   console.log('Message sent')
+// }).catch((error) => {
+//   console.log(error.response.body)
+//   // console.log(error.response.body.errors[0].message)
+// })
 
 if (mongo.uri) {
   mongoose.connect(mongo.uri)
