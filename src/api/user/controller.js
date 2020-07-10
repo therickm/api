@@ -33,7 +33,6 @@ export const churchSearch = ({ params }, res, next) =>
         }
       ]
     }
-    , User.view(true)
   )
     .then(notFound(res))
     .then((users) => users.map((user) => user.view()))

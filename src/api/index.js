@@ -7,6 +7,10 @@ import event from './event'
 import playlist from './playlist'
 import sermon from './sermon'
 import quote from './quote'
+import collections from './collections'
+import items from './items'
+import orders from './orders'
+import livestreams from './livestreams'
 
 const router = new Router()
 
@@ -41,6 +45,10 @@ router.use('/events', event)
 router.use('/playlists', playlist)
 router.use('/sermons', sermon)
 router.use('/quotes', quote)
+router.use('/collections', collections)
+router.use('/items', items)
+router.use('/orders', orders)
+router.use('/livestreams', livestreams)
 
 console.log('in index');
 

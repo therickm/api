@@ -59,8 +59,8 @@ router.get('/:id',
   show)
 
 /**
-* @api {get} /users/:q Search approved Churches 
-* @apiName Churches/users
+      * @api {get} /users/:q Search approved Churches 
+      * @apiName Churches/users
 * @apiGroup Churches
 * @apiPermission public
 * @apiSuccess {Object} user User's data.

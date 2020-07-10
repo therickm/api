@@ -1,14 +1,11 @@
 import mongoose, { Schema } from 'mongoose'
 
-const playlistSchema = new Schema({
-  date: {
+const livestreamsSchema = new Schema({
+  url: {
     type: String
   },
-  songs: {
-    type: Array
-  },
   user: {
-    type: Object
+    type: String
   }
 }, {
   timestamps: true,
@@ -18,13 +15,12 @@ const playlistSchema = new Schema({
   }
 })
 
-playlistSchema.methods = {
+livestreamsSchema.methods = {
   view (full) {
     const view = {
       // simple view
       id: this.id,
-      date: this.date,
-      songs: this.songs,
+      url: this.url,
       user: this.user,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
@@ -37,7 +33,7 @@ playlistSchema.methods = {
   }
 }
 
-const model = mongoose.model('Playlist', playlistSchema)
+const model = mongoose.model('Livestreams', livestreamsSchema)
 
 export const schema = model.schema
 export default model

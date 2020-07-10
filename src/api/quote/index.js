@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy, followed } from './controller'
+import { create, index, show, update, destroy, followed, search } from './controller'
 import { schema } from './model'
 export Quote, { schema } from './model'
 
@@ -87,5 +87,30 @@ router.delete('/:id',
 router.get('/followed/:client',
   query(),
   followed)
+
+  /**
+ * @api {get} /quotes/search/:q Quote search
+ * @apiName RetrieveQuote
+ * @apiGroup Quote
+ * @apiSuccess {Object} event Quote's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Quote not found.
+ */
+router.get('/search/:q/:d',
+search)
+router.get('/search//:d',
+search)
+
+  /**
+ * @api {get} /quotes/search/:q/:d Quote search
+ * @apiName RetrieveQuote
+ * @apiGroup Quote
+ * @apiSuccess {Object} event Quote's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Quote not found.
+ */
+router.get('/search/:q',
+search)
+
 
 export default router

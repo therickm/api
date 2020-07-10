@@ -55,3 +55,27 @@ export const followed = ({ params }, res, next) => {
     .then(success(res))
     .catch(next)
 }
+
+export const search = ({ params }, res, next) =>
+Sermon.find(
+    {
+      $or: [
+        {
+          title: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          location: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          hashtags: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          messages: { '$regex': params.q, '$options': 'i' }
+        }        
+      ]
+    }
+  )
+    .then(notFound(res))
+    .then((sermons) => sermons.map((sermon) => sermon.view()))
+    .then(success(res))
+    .catch(next)    

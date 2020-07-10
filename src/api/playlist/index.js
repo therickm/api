@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy, followed } from './controller'
+import { create, index, show, update, destroy, followed, search } from './controller'
 import { schema } from './model'
 export Playlist, { schema } from './model'
 
@@ -82,5 +82,18 @@ router.delete('/:id',
 router.get('/followed/:client',
   query(),
   followed)
+
+
+  /**
+ * @api {get} /playlist/search/:q/:d Playlist search
+ * @apiName RetrieveSomePlaylists
+ * @apiGroup Playlist
+ * @apiSuccess {Object} playlist Playlist's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Playlist not found.
+ */
+router.get('/search/:q',
+search)
+
 
 export default router

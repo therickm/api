@@ -1,14 +1,17 @@
 import mongoose, { Schema } from 'mongoose'
 
-const playlistSchema = new Schema({
-  date: {
+const itemsSchema = new Schema({
+  name: {
     type: String
   },
-  songs: {
-    type: Array
+  discription: {
+    type: String
+  },
+  unit_price: {
+    type: String
   },
   user: {
-    type: Object
+    type: String
   }
 }, {
   timestamps: true,
@@ -18,13 +21,14 @@ const playlistSchema = new Schema({
   }
 })
 
-playlistSchema.methods = {
+itemsSchema.methods = {
   view (full) {
     const view = {
       // simple view
       id: this.id,
-      date: this.date,
-      songs: this.songs,
+      name: this.name,
+      discription: this.discription,
+      unit_price: this.unit_price,
       user: this.user,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
@@ -37,7 +41,7 @@ playlistSchema.methods = {
   }
 }
 
-const model = mongoose.model('Playlist', playlistSchema)
+const model = mongoose.model('Items', itemsSchema)
 
 export const schema = model.schema
 export default model

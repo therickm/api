@@ -54,3 +54,18 @@ export const followed = ({ params }, res, next) => {
     .then(success(res))
     .catch(next)
 }
+
+export const search = ({ params }, res, next) =>
+Playlist.find(
+    {
+      $or: [
+        {
+          date: { '$regex': params.q, '$options': 'i' }
+        }     
+      ]
+    }
+  )
+    .then(notFound(res))
+    .then((playlists) => playlists.map((playlist) => playlist.view()))
+    .then(success(res))
+    .catch(next)    

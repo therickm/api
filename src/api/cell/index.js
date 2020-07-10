@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy, followed } from './controller'
+import { create, index, show, update, destroy, followed,search } from './controller'
 import { schema } from './model'
 export Cell, { schema } from './model'
 
@@ -89,5 +89,17 @@ router.delete('/:id',
 router.get('/followed/:client',
   query(),
   followed)
+
+    /**
+ * @api {get} /cells/search/:q Cells search
+ * @apiName RetrieveSomeCells
+ * @apiGroup Cell
+ * @apiSuccess {Object} cell Cell's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Cell not found.
+ */
+router.get('/search/:q',
+search)
+
 
 export default router

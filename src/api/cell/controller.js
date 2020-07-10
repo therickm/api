@@ -55,3 +55,24 @@ export const followed = ({ params }, res, next) => {
     .then(success(res))
     .catch(next)
 }
+
+export const search = ({ params }, res, next) =>
+Cell.find(
+    {
+      $or: [
+        {
+          name: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          leader: { '$regex': params.q, '$options': 'i' }
+        },
+        {
+          description: { '$regex': params.q, '$options': 'i' }
+        }
+      ]
+    }
+  )
+    .then(notFound(res))
+    .then((cells) => cells.map((cell) => cell.view()))
+    .then(success(res))
+    .catch(next)    

@@ -1,6 +1,7 @@
 import { success, notFound } from '../../services/response/'
 import { Quote } from '.'
 import { all } from '../user/controller';
+import moment from 'moment';
 
 
 export const create = ({ bodymen: { body } }, res, next) =>
@@ -57,4 +58,28 @@ export const destroy = ({ params }, res, next) =>
     .then(notFound(res))
     .then((quote) => quote ? quote.remove() : null)
     .then(success(res, 204))
+    .catch(next)
+
+export const search = ({ params }, res, next) =>
+  Quote.find(
+    {
+      $or: [
+        {
+          verse: { '$regex': params.q|| '', '$options': 'i' }
+        },
+        {
+          application: { '$regex': params.q|| '', '$options': 'i' }
+        },
+        {
+          lessons: { '$regex': params.q || '', '$options': 'i' }
+        }
+      ]
+    }
+  )
+    .then(notFound(res))
+    .then((events) => params.d ? events.filter(r=>moment(params.d).isSame(r.date, 'day')).map((event) => event.view()):events.map((event) => event.view()))
+
+    // .then((res)=>params.d && res.)
+    .then(success(res))
+    // .then(res=>res.filter(r=>moment(params.d).isSame(r.date, 'day')))
     .catch(next)
