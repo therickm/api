@@ -1,13 +1,21 @@
 import { success, notFound } from '../../services/response/'
 import { Quote } from '.'
+import { User } from '../user/'
 import { all } from '../user/controller';
 import moment from 'moment';
+import { notifyUsers } from '../../utils/fcm';
 
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Quote.create(body)
     .then((quote) => quote.view(true))
     .then(success(res, 201))
+    .then(res=>{
+      User.findById(res.id)
+      .then(({followers,church})=>{
+        followers.map(follower=>notifyUsers(follower.token,process.env.apiKey,{title:"New Quote", body:church +' shared a new quote'}))
+      })
+    })
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>

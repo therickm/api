@@ -55,7 +55,7 @@ router.get('/:id',
 
   /**
  * @api {get} /events/search/:q Event search
- * @apiName RetrieveEvent
+ * @apiName RetrieveSomeEvent
  * @apiGroup Event
  * @apiSuccess {Object} event Event's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.

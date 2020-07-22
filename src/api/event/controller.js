@@ -1,11 +1,19 @@
 import { success, notFound } from '../../services/response/'
 import { Event } from '.'
 import { all } from '../user/controller'
+import { notifyUsers } from '../../utils/fcm'
+import User from '../user'
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Event.create(body)
     .then((event) => event.view(true))
     .then(success(res, body, 201))
+    .then(res=>{
+      User.findById(res.id)
+      .then(({followers,church})=>{
+        followers.map(follower=>notifyUsers(follower.token,process.env.apiKey,{title:"New Event", body:church +' has scheduled an event'}))
+      })
+    })
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>

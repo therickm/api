@@ -97,7 +97,7 @@ router.get('/followed/:client',
     /**
  * @api {get} /sermons/search/:q Sermons search
  * @apiName RetrieveSomeSermons
- * @apiGroup Sermons
+ * @apiGroup Sermon
  * @apiSuccess {Object} sermons Sermons 's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sermons not found.

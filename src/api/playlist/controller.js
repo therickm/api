@@ -1,10 +1,18 @@
 import { success, notFound } from '../../services/response/'
 import { Playlist } from '.'
+import { User } from '../user/'
 import { all } from '../user/controller'
+import { notifyUsers } from '../../utils/fcm'
 export const create = ({ bodymen: { body } }, res, next) =>
   Playlist.create(body)
     .then((playlist) => playlist.view(true))
     .then(success(res, 201))
+    .then(res=>{
+      User.findById(res.id)
+      .then(({followers,church})=>{
+        followers.map(follower=>notifyUsers(follower.token,process.env.apiKey,{title:"New Playist", body:church +' has shared playlist'}))
+      })
+    })
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>

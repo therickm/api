@@ -79,7 +79,7 @@ router.delete('/:id',
 
 /**
 * @api {get} Quotes/followed/:client Quotes From Churches Followed
-* @apiName Churches Followed
+* @apiName ChurchesFollowed
 * @apiGroup Quote
 * @apiSuccess (Success 204) 204 No Content.
 * @apiError 404 Quote not found.
@@ -89,8 +89,8 @@ router.get('/followed/:client',
   followed)
 
   /**
- * @api {get} /quotes/search/:q Quote search
- * @apiName RetrieveQuote
+ * @api {get} /quotes/search/:q/:d Search By Query And Date
+ * @apiName SearchByQueryAndDate
  * @apiGroup Quote
  * @apiSuccess {Object} event Quote's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
@@ -98,12 +98,21 @@ router.get('/followed/:client',
  */
 router.get('/search/:q/:d',
 search)
+
+ /**
+ * @api {get} /quotes/search//:d Search BY Date
+ * @apiName SearchBYDate
+ * @apiGroup Quote
+ * @apiSuccess {Object} event Quote's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 Quote not found.
+ */
 router.get('/search//:d',
 search)
 
   /**
- * @api {get} /quotes/search/:q/:d Quote search
- * @apiName RetrieveQuote
+ * @api {get} /quotes/search/:q Search BY Query
+ * @apiName SearchBYQuery
  * @apiGroup Quote
  * @apiSuccess {Object} event Quote's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.

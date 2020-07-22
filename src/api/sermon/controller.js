@@ -1,11 +1,19 @@
 import { success, notFound } from '../../services/response/'
 import { Sermon } from '.'
 import { all } from '../user/controller'
+import { notifyUsers } from '../../utils/fcm'
+import User from '../user'
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Sermon.create(body)
     .then((sermon) => sermon.view(true))
     .then(success(res, 201))
+    .then(res=>{
+      User.findById(res.id)
+      .then(({followers,church})=>{
+        followers.map(follower=>notifyUsers(follower.token,process.env.apiKey,{title:"New Sermon", body:church +' posted a sermon'}))
+      })
+    })
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
