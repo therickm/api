@@ -6,7 +6,7 @@ import { schema } from './model'
 export Cell, { schema } from './model'
 
 const router = new Router()
-const { name, leader, phone, pacInput, description, user } = schema.tree
+const { name, leader, phone, location, description, user,image } = schema.tree
 
 /**
  * @api {post} /cells Create cell
@@ -15,7 +15,8 @@ const { name, leader, phone, pacInput, description, user } = schema.tree
  * @apiParam name Cell's name.
  * @apiParam leader Cell's leader.
  * @apiParam phone Cell's phone.
- * @apiParam pacInput Cell's pacInput.
+ * @apiParam image Cell's image.
+ * @apiParam location Cell's location.
  * @apiParam description Cell's description.
  * @apiParam user Cell's user.
  * @apiSuccess {Object} cell Cell's data.
@@ -23,7 +24,7 @@ const { name, leader, phone, pacInput, description, user } = schema.tree
  * @apiError 404 Cell not found.
  */
 router.post('/',
-  body({ name, leader, phone, pacInput, description, user }),
+  body({ name, leader, phone, location, description, user,image }),
   create)
 
 /**
@@ -57,15 +58,16 @@ router.get('/:id',
  * @apiParam name Cell's name.
  * @apiParam leader Cell's leader.
  * @apiParam phone Cell's phone.
- * @apiParam pacInput Cell's pacInput.
+ * @apiParam location Cell's location.
  * @apiParam description Cell's description.
  * @apiParam user Cell's user.
+ * @apiParam image Cell's Image.
  * @apiSuccess {Object} cell Cell's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Cell not found.
  */
 router.put('/:id',
-  body({ name, leader, phone, pacInput, description, user }),
+  body({ name, leader, phone, location, description, user,image }),
   update)
 
 /**

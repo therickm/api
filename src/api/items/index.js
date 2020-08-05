@@ -6,22 +6,23 @@ import { schema } from './model'
 export Items, { schema } from './model'
 
 const router = new Router()
-const { name, discription, unit_price, user } = schema.tree
+const { name, description, unit_price, user,image } = schema.tree
 
 /**
  * @api {post} /items Create items
  * @apiName CreateItems
  * @apiGroup Items
  * @apiParam name Items's name.
- * @apiParam discription Items's discription.
+ * @apiParam description Items's description.
  * @apiParam unit_price Items's unit_price.
- * @apiParam user Items's user.
+ * @apiParam user User.
+ * @apiParam image Image.
  * @apiSuccess {Object} items Items's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Items not found.
  */
 router.post('/',
-  body({ name, discription, unit_price, user }),
+  body({ name, description, unit_price, user }),
   create)
 
 /**
@@ -53,15 +54,16 @@ router.get('/:id',
  * @apiName UpdateItems
  * @apiGroup Items
  * @apiParam name Items's name.
- * @apiParam discription Items's discription.
+ * @apiParam description Items's description.
  * @apiParam unit_price Items's unit_price.
- * @apiParam user Items's user.
+ * @apiParam  user User.
+ * @apiParam  image Image.
  * @apiSuccess {Object} items Items's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Items not found.
  */
 router.put('/:id',
-  body({ name, discription, unit_price, user }),
+  body({ name, description, unit_price, user,image }),
   update)
 
 /**

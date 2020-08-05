@@ -142,6 +142,7 @@ Note
 | name			| 			|  <p>Cell's name.</p>							|
 | leader			| 			|  <p>Cell's leader.</p>							|
 | phone			| 			|  <p>Cell's phone.</p>							|
+| image			| 			|  <p>Cell's image.</p>							|
 | pacInput			| 			|  <p>Cell's pacInput.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
@@ -201,6 +202,7 @@ Note
 | pacInput			| 			|  <p>Cell's pacInput.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
+| image			| 			|  <p>Cell's Image.</p>							|
 
 # Churches
 
@@ -508,9 +510,10 @@ Note
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | name			| 			|  <p>Items's name.</p>							|
-| discription			| 			|  <p>Items's discription.</p>							|
+| description			| 			|  <p>Items's description.</p>							|
 | unit_price			| 			|  <p>Items's unit_price.</p>							|
-| user			| 			|  <p>Items's user.</p>							|
+| user			| 			|  <p>User.</p>							|
+| image			| 			|  <p>Image.</p>							|
 
 ## Delete items
 
@@ -538,9 +541,10 @@ Note
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | name			| 			|  <p>Items's name.</p>							|
-| discription			| 			|  <p>Items's discription.</p>							|
+| description			| 			|  <p>Items's description.</p>							|
 | unit_price			| 			|  <p>Items's unit_price.</p>							|
-| user			| 			|  <p>Items's user.</p>							|
+| user			| 			|  <p>User.</p>							|
+| image			| 			|  <p>Image.</p>							|
 
 # Livestreams
 
