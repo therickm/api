@@ -66,7 +66,7 @@ router.put('/:id',
  * @api {delete} /collections/:id Delete collections
  * @apiName DeleteCollections
  * @apiGroup Collections
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Collections not found.
  */
 router.delete('/:id',

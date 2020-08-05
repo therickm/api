@@ -16,7 +16,7 @@ const { verse, application, lessons, date, user } = schema.tree
  * @apiParam application Quote's application.
  * @apiParam lessons Quote's lessons.
  * @apiParam date Quote's date.
- * @apiParam user Quote's user.
+ * @apiParam user Quote's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).
  * @apiSuccess {Object} quote Quote's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Quote not found.
@@ -71,7 +71,7 @@ router.put('/:id',
  * @api {delete} /quotes/:id Delete quote
  * @apiName DeleteQuote
  * @apiGroup Quote
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Quote not found.
  */
 router.delete('/:id',
@@ -81,7 +81,7 @@ router.delete('/:id',
 * @api {get} Quotes/followed/:client Quotes From Churches Followed
 * @apiName ChurchesFollowed
 * @apiGroup Quote
-* @apiSuccess (Success 204) 204 No Content.
+* @apiSuccess (Success 204) 204 List of quotes from churches followed by a user.
 * @apiError 404 Quote not found.
 */
 router.get('/followed/:client',

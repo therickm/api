@@ -10,13 +10,13 @@ const router = new Router()
 const { email, password, name, picture, role, church, phone, status } = schema.tree
 
 /**
- * @api {get} /users Retrieve users/Churches
+ * @api {get} /users [1b] Retrive all churches
  * @apiName RetrieveUsers
  * @apiGroup Churches
  * @apiPermission admin
  * @apiParam {String} access_token User access_token.
  * @apiUse listParams
- * @apiSuccess {Object[]} users List of users.
+ * @apiSuccess {Object[]} churches List of churches.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 Admin access only.
  */
@@ -25,11 +25,10 @@ router.get('/',
   query(),
   index)
 /**
- * @api {get} /users/me Retrieve current user/Church
+ * @api {get} /users/me Retrieve current user/Church 
  * @apiName RetrieveCurrentUser
  * @apiGroup Churches
  * @apiPermission user
- * @apiParam {String} access_token User access_token.
  * @apiSuccess {Object} user User's data.
  */
 router.get('/me',
@@ -37,51 +36,49 @@ router.get('/me',
   showMe)
 
 /**
- * @api {get} /users/by-status/:status Retrieve Church by status
+ * @api {get} /users/by-status/:status [1.b] Retrieve (Approved churched, Pending approval and Suspended churches)
  * @apiName RetrieveUserByStatus
  * @apiGroup Churches
  * @apiPermission public
- * @apiSuccess {Object} user User's data.
- * @apiError 404 User not found.
+ * @apiSuccess {Object} churches List of churches according to the specified status ie(approved or suspended).
  */
 router.get('/by-status/:status',
   getChurchesByStatus)
 
 /**
- * @api {get} /users/:id Retrieve user/Church
+ * @api {get} /users/:id Retrieve Church by id
  * @apiName RetrieveUser
  * @apiGroup Churches
  * @apiPermission public
- * @apiSuccess {Object} user User's data.
- * @apiError 404 User not found.
+ * @apiSuccess {Object} church Church's data.
  */
 router.get('/:id',
   show)
 
 /**
-      * @api {get} /users/:q Search approved Churches 
-      * @apiName Churches/users
+* @api {get} /users/search/:q [1.d] Search approved Churches 
+* @apiName Churches/users
 * @apiGroup Churches
 * @apiPermission public
-* @apiSuccess {Object} user User's data.
+* @apiSuccess {Object} church Church's data.
 * @apiError 404 User not found.
 */
 router.get('/search/:q', churchSearch)
 
 /**
-* @api {put} /users/follow/:id Follow Church
+* @api {put} /users/follow/:id [3.c] Follow Church
 * @apiName followChurch
 * @apiGroup Churches
 * @apiPermission public
 * @apiParam {String} user App user's ID.
-* @apiSuccess {Object} app_user_id User's data.
-* @apiError 404 User not found.
+* @apiParam {String} user App user's FCM token.
+* @apiSuccess {Object} Churches Approved churchrs that match query.
 */
 router.put('/follow/:id', follow)
 
 
 /**
-* @api {put} /users/approve/:id Approve Church
+* @api {put} /users/approve/:id [1.f] Approve Church
 * @apiName approveChurch
 * @apiGroup Churches
 * @apiPermission public
@@ -108,14 +105,14 @@ router.put('/suspend/:id', suspend)
 * @apiName unfollowChurches
 * @apiGroup Churches
 * @apiPermission public
-* @apiParam {String} app_user_id App user's ID.
+* @apiParam {object} app_user_details Details about the app user most importantly app user id as (id) and FCM token as (tolen).
 * @apiSuccess {Object} user User's data.
 * @apiError 404 User not found.
 */
 router.put('/unfollow/:id', unfollow)
 
 /**
- * @api {post} /users Create(Super Admin & Church)
+ * @api {post} /users [1.a] Create(Super Admin & Church)
  * @apiName CreateUser
  * @apiGroup Churches
  * @apiPermission master
@@ -137,11 +134,10 @@ router.post('/',
   create)
 
 /**
- * @api {put} /users/:id Update user/Church
+ * @api {put} /users/:id [1.c] Update Church details
  * @apiName UpdateUser
  * @apiGroup Churches
  * @apiPermission user
- * @apiParam {String} access_token User access_token.
  * @apiParam {String} [name] User's name.
  * @apiParam {String} [picture] User's picture.
  * @apiSuccess {Object} user User's data.
@@ -150,7 +146,7 @@ router.post('/',
  * @apiError 404 User not found.
  */
 router.put('/:id',
-  token({ required: true }),
+  // token({ required: true }),
   body({ name, picture }),
   update)
 
@@ -171,27 +167,25 @@ router.put('/:id/password',
   updatePassword)
 
 /**
- * @api {delete} /users/:id Delete user/Church
+ * @api {delete} /users/:id [1.e] Delete Church
  * @apiName DeleteUser
  * @apiGroup Churches
  * @apiPermission admin
- * @apiParam {String} access_token User access_token.
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 401 Admin access only.
  * @apiError 404 User not found.
  */
 router.delete('/:id',
-  token({ required: true, roles: ['admin'] }),
-  destroy)
+  // token({ required: true, roles: ['admin'] }),
+  destroy)  
 
 /**
-* @api {put} /users/following/:app_user_id Get Churches Followed
+* @api {get} /users/following/:app_user_id Get Churches Followed by a user
 * @apiName ChurchesFollowed
 * @apiGroup Churches
 * @apiParam {String} app_user_id App user's ID.
 * @apiPermission public
-* @apiSuccess {Object} user User's data.
-* @apiError 404 User not found.
+* @apiSuccess {Object} churches List of churches followed specified app user  .
 */
 router.get('/following/:app_user_id',
   following)

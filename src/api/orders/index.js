@@ -66,7 +66,7 @@ router.put('/:id',
  * @api {delete} /orders/:id Delete orders
  * @apiName DeleteOrders
  * @apiGroup Orders
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Orders not found.
  */
 router.delete('/:id',

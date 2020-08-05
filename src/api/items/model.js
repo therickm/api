@@ -4,7 +4,10 @@ const itemsSchema = new Schema({
   name: {
     type: String
   },
-  discription: {
+  image: {
+    type: String
+  },
+  description: {
     type: String
   },
   unit_price: {
@@ -27,9 +30,10 @@ itemsSchema.methods = {
       // simple view
       id: this.id,
       name: this.name,
-      discription: this.discription,
+      description: this.description,
       unit_price: this.unit_price,
       user: this.user,
+      image:this.image,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

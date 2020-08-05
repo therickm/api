@@ -14,7 +14,7 @@ const { date, songs, user } = schema.tree
  * @apiGroup Playlist
  * @apiParam date Playlist's date.
  * @apiParam songs Playlist's songs.
- * @apiParam user Playlist's user.
+ * @apiParam user Playlist's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).
  * @apiSuccess {Object} playlist Playlist's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Playlist not found.
@@ -66,7 +66,7 @@ router.put('/:id',
  * @api {delete} /playlists/:id Delete playlist
  * @apiName DeletePlaylist
  * @apiGroup Playlist
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Playlist not found.
  */
 router.delete('/:id',
@@ -76,7 +76,7 @@ router.delete('/:id',
 * @api {get} /followed/:client Playlists From Churches Followed
 * @apiName Churches Followed
 * @apiGroup Playlist
-* @apiSuccess (Success 204) 204 No Content.
+* @apiSuccess (Success 204) 204 List of playlists from churches followed by a user.
 * @apiError 404 Playlist not found.
 */
 router.get('/followed/:client',

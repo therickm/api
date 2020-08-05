@@ -72,7 +72,7 @@ router.put('/:id',
  * @api {delete} /cells/:id Delete cell
  * @apiName DeleteCell
  * @apiGroup Cell
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Cell not found.
  */
 router.delete('/:id',

@@ -36,6 +36,6 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Livestreams.findById(params.id)
     .then(notFound(res))
-    .then((livestreams) => livestreams ? livestreams.remove() : null)
+    .then((livestreams) => livestreams ? livestreams.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)

@@ -19,7 +19,7 @@ const { title, location, time, date, hashtags, image, messages, user } = schema.
  * @apiParam hashtags Sermon's hashtags.
  * @apiParam image Sermon's image.
  * @apiParam messages Sermon's messages.
- * @apiParam user Sermon's user.
+ * @apiParam user Sermon's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).
  * @apiSuccess {Object} sermon Sermon's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Sermon not found.
@@ -76,7 +76,7 @@ router.put('/:id',
  * @api {delete} /sermons/:id Delete sermon
  * @apiName DeleteSermon
  * @apiGroup Sermon
- * @apiSuccess (Success 204) 204 No Content.
+ * @apiSuccess (Success 200) 200 { "message": "Deleted" }.
  * @apiError 404 Sermon not found.
  */
 router.delete('/:id',
@@ -86,7 +86,7 @@ router.delete('/:id',
 * @api {get} /sermons/followed/:client Sermons From Churches Followed
 * @apiName Churches Followed
 * @apiGroup Sermon
-* @apiSuccess (Success 204) 204 No Content.
+* @apiSuccess (Success 204) 204 List of sermons from churches followed by a user.
 * @apiError 404 Sermon not found.
 */
 router.get('/followed/:client',

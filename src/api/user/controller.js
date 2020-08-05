@@ -59,7 +59,7 @@ export const churchSearch = ({ params }, res, next) =>
 export const follow = (req, res, next) => {
   User.findById(req.params.id === 'me' ? user.id : req.params.id)
     .then(notFound(res))
-    .then((user) => user ? Object.assign(user, { followers: [...user.followers, req.body.app_user_id] }).save() : null)
+    .then((user) => user ? Object.assign(user, { followers: [...user.followers, {id:req.body.app_user_id,token:req.body.app_user_id}] }).save() : null)
     .then((user) => user ? user.view(true) : null)
     .then(success(res))
     .catch(next)
@@ -173,7 +173,7 @@ export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =
 export const destroy = ({ params }, res, next) =>
   User.findById(params.id)
     .then(notFound(res))
-    .then((user) => user ? user.remove() : null)
+    .then((user) => user ? user.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)
 

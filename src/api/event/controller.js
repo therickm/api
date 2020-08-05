@@ -45,7 +45,7 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Event.findById(params.id)
     .then(notFound(res))
-    .then((event) => event ? event.remove() : null)
+    .then((event) => event ? event.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)
 

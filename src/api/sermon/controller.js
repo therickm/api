@@ -45,7 +45,7 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Sermon.findById(params.id)
     .then(notFound(res))
-    .then((sermon) => sermon ? sermon.remove() : null)
+    .then((sermon) => sermon ? sermon.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)
 

@@ -10,7 +10,10 @@ const cellSchema = new Schema({
   phone: {
     type: String
   },
-  pacInput: {
+  location: {
+    type: String
+  },
+  image: {
     type: String
   },
   description: {
@@ -35,7 +38,8 @@ cellSchema.methods = {
       name: this.name,
       leader: this.leader,
       phone: this.phone,
-      pacInput: this.pacInput,
+      pacInput: this.location,
+      image:this.image,
       description: this.description,
       user: this.user,
       createdAt: this.createdAt,

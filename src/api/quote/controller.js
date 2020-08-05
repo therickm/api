@@ -64,8 +64,8 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Quote.findById(params.id)
     .then(notFound(res))
-    .then((quote) => quote ? quote.remove() : null)
-    .then(success(res, 204))
+    .then((quote) => quote ? quote.remove().then(()=>res.json({"message": "Deleted"})) : null)
+    .then(success(res,204))
     .catch(next)
 
 export const search = ({ params }, res, next) =>

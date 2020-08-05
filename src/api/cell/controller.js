@@ -37,7 +37,7 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Cell.findById(params.id)
     .then(notFound(res))
-    .then((cell) => cell ? cell.remove() : null)
+    .then((cell) => cell ? cell.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)
 

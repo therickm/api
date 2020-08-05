@@ -1,6 +1,6 @@
-# prayista v0.0.0
+# Prayista v0.1.0
 
-
+Note
 
 - [Auth](#auth)
 	- [Authenticate](#authenticate)
@@ -15,18 +15,18 @@
 	- [Update cell](#update-cell)
 	
 - [Churches](#churches)
-	- [Search approved Churches](#search-approved-churches)
-	- [Get Churches Followed](#get-churches-followed)
-	- [Create(Super Admin &amp; Church)](#create(super-admin-&amp;-church))
-	- [Delete user/Church](#delete-user/church)
+	- [[1.d] Search approved Churches](#[1.d]-search-approved-churches)
+	- [Get Churches Followed by a user](#get-churches-followed-by-a-user)
+	- [[1.a] Create(Super Admin &amp; Church)](#[1.a]-create(super-admin-&amp;-church))
+	- [[1.e] Delete Church](#[1.e]-delete-church)
 	- [Retrieve current user/Church](#retrieve-current-user/church)
-	- [Retrieve user/Church](#retrieve-user/church)
-	- [Retrieve Church by status](#retrieve-church-by-status)
-	- [Retrieve users/Churches](#retrieve-users/churches)
+	- [Retrieve Church by id](#retrieve-church-by-id)
+	- [[1.b] Retrieve (Approved churched, Pending approval and Suspended churches)](#[1.b]-retrieve-(approved-churched,-pending-approval-and-suspended-churches))
+	- [[1b] Retrive all churches](#[1b]-retrive-all-churches)
 	- [Update password](#update-password)
-	- [Update user/Church](#update-user/church)
-	- [Approve Church](#approve-church)
-	- [Follow Church](#follow-church)
+	- [[1.c] Update Church details](#[1.c]-update-church-details)
+	- [[1.f] Approve Church](#[1.f]-approve-church)
+	- [[3.c] Follow Church](#[3.c]-follow-church)
 	- [Suspend Church](#suspend-church)
 	- [Unfollow Church](#unfollow-church)
 	
@@ -204,18 +204,18 @@
 
 # Churches
 
-## Search approved Churches
+## [1.d] Search approved Churches
 
 
 
-	GET /users/:q
+	GET /users/search/:q
 
 
-## Get Churches Followed
+## Get Churches Followed by a user
 
 
 
-	PUT /users/following/:app_user_id
+	GET /users/following/:app_user_id
 
 
 ### Parameters
@@ -224,7 +224,7 @@
 |---------|-----------|--------------------------------------|
 | app_user_id			| String			|  <p>App user's ID.</p>							|
 
-## Create(Super Admin &amp; Church)
+## [1.a] Create(Super Admin &amp; Church)
 
 
 
@@ -243,18 +243,12 @@
 | picture			| String			| **optional** <p>User's picture.</p>							|
 | role			| String			| **optional** <p>User's role.</p>							|
 
-## Delete user/Church
+## [1.e] Delete Church
 
 
 
 	DELETE /users/:id
 
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
 
 ## Retrieve current user/Church
 
@@ -263,27 +257,21 @@
 	GET /users/me
 
 
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
-
-## Retrieve user/Church
+## Retrieve Church by id
 
 
 
 	GET /users/:id
 
 
-## Retrieve Church by status
+## [1.b] Retrieve (Approved churched, Pending approval and Suspended churches)
 
 
 
 	GET /users/by-status/:status
 
 
-## Retrieve users/Churches
+## [1b] Retrive all churches
 
 
 
@@ -319,7 +307,7 @@
 |---------|-----------|--------------------------------------|
 | password			| String			|  <p>User's new password.</p>							|
 
-## Update user/Church
+## [1.c] Update Church details
 
 
 
@@ -330,18 +318,17 @@
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| access_token			| String			|  <p>User access_token.</p>							|
 | name			| String			| **optional** <p>User's name.</p>							|
 | picture			| String			| **optional** <p>User's picture.</p>							|
 
-## Approve Church
+## [1.f] Approve Church
 
 
 
 	PUT /users/approve/:id
 
 
-## Follow Church
+## [3.c] Follow Church
 
 
 
@@ -372,7 +359,7 @@
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| app_user_id			| String			|  <p>App user's ID.</p>							|
+| app_user_details			| object			|  <p>Details about the app user most importantly app user id as (id) and FCM token as (tolen).</p>							|
 
 # Collections
 
@@ -402,18 +389,8 @@
 
 
 
-	GET /collections
+	GET /collections/:id
 
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
 
 ## Update collections
 
@@ -457,7 +434,7 @@
 | hashtags			| 			|  <p>Event's hashtags.</p>							|
 | image			| 			|  <p>Event's image.</p>							|
 | description			| 			|  <p>Event's description.</p>							|
-| user			| 			|  <p>Event's user.</p>							|
+| user			| 			|  <p>Event's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).</p>							|
 
 ## Delete event
 
@@ -546,18 +523,8 @@
 
 
 
-	GET /items
+	GET /items/:id
 
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
 
 ## Update items
 
@@ -602,18 +569,8 @@
 
 
 
-	GET /livestreams
+	GET /livestreams/:id
 
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
 
 ## Update livestreams
 
@@ -657,18 +614,8 @@
 
 
 
-	GET /orders
+	GET /orders/:id
 
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| q			| String			| **optional** <p>Query to search.</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-| fields			| String[]			| **optional** <p>Fields to be returned.</p>							|
 
 ## Update orders
 
@@ -743,7 +690,7 @@
 |---------|-----------|--------------------------------------|
 | date			| 			|  <p>Playlist's date.</p>							|
 | songs			| 			|  <p>Playlist's songs.</p>							|
-| user			| 			|  <p>Playlist's user.</p>							|
+| user			| 			|  <p>Playlist's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).</p>							|
 
 ## Delete playlist
 
@@ -822,7 +769,7 @@
 | application			| 			|  <p>Quote's application.</p>							|
 | lessons			| 			|  <p>Quote's lessons.</p>							|
 | date			| 			|  <p>Quote's date.</p>							|
-| user			| 			|  <p>Quote's user.</p>							|
+| user			| 			|  <p>Quote's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).</p>							|
 
 ## Delete quote
 
@@ -920,7 +867,7 @@
 | hashtags			| 			|  <p>Sermon's hashtags.</p>							|
 | image			| 			|  <p>Sermon's image.</p>							|
 | messages			| 			|  <p>Sermon's messages.</p>							|
-| user			| 			|  <p>Sermon's user.</p>							|
+| user			| 			|  <p>Sermon's creater (An object containing information about the creater with id as required, this is for search and retrival reasons).</p>							|
 
 ## Delete sermon
 

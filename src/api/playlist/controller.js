@@ -44,7 +44,7 @@ export const update = ({ bodymen: { body }, params }, res, next) =>
 export const destroy = ({ params }, res, next) =>
   Playlist.findById(params.id)
     .then(notFound(res))
-    .then((playlist) => playlist ? playlist.remove() : null)
+    .then((playlist) => playlist ? playlist.remove().then(()=>res.json({"message": "Deleted"})) : null)
     .then(success(res, 204))
     .catch(next)
 
