@@ -7,6 +7,10 @@ const quoteSchema = new Schema({
   application: {
     type: String
   },
+
+  quote: {
+    type: String
+  },
   lessons: {
     type: String
   },
@@ -34,6 +38,7 @@ quoteSchema.methods = {
       lessons: this.lessons,
       date: this.date,
       user: this.user,
+      quote: this.quote,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

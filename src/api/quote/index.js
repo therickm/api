@@ -56,6 +56,7 @@ router.get('/:id',
  * @apiGroup Quote
  * @apiParam verse Quote's verse.
  * @apiParam application Quote's application.
+ * @apiParam quote The actual quote.
  * @apiParam lessons Quote's lessons.
  * @apiParam date Quote's date.
  * @apiParam user Quote's user.

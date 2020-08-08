@@ -143,7 +143,7 @@ Note
 | leader			| 			|  <p>Cell's leader.</p>							|
 | phone			| 			|  <p>Cell's phone.</p>							|
 | image			| 			|  <p>Cell's image.</p>							|
-| pacInput			| 			|  <p>Cell's pacInput.</p>							|
+| location			| 			|  <p>Cell's location.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
 
@@ -199,7 +199,7 @@ Note
 | name			| 			|  <p>Cell's name.</p>							|
 | leader			| 			|  <p>Cell's leader.</p>							|
 | phone			| 			|  <p>Cell's phone.</p>							|
-| pacInput			| 			|  <p>Cell's pacInput.</p>							|
+| location			| 			|  <p>Cell's location.</p>							|
 | description			| 			|  <p>Cell's description.</p>							|
 | user			| 			|  <p>Cell's user.</p>							|
 | image			| 			|  <p>Cell's Image.</p>							|
