@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import moment from 'moment'
 
 const playlistSchema = new Schema({
   date: {
@@ -23,7 +24,7 @@ playlistSchema.methods = {
     const view = {
       // simple view
       id: this.id,
-      date: this.date,
+      date: moment(this.date).format('YYYY-MM-DD'),
       songs: this.songs,
       user: this.user,
       createdAt: this.createdAt,

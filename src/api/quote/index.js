@@ -6,7 +6,7 @@ import { schema } from './model'
 export Quote, { schema } from './model'
 
 const router = new Router()
-const { verse, application, lessons, date, user } = schema.tree
+const { verse, application, lessons, date, user,quote } = schema.tree
 
 /**
  * @api {post} /quotes Create quote
@@ -22,7 +22,7 @@ const { verse, application, lessons, date, user } = schema.tree
  * @apiError 404 Quote not found.
  */
 router.post('/',
-  body({ verse, application, lessons, date, user }),
+  body({ verse, application, lessons, date, user,quote }),
   create)
 
 /**
@@ -65,7 +65,7 @@ router.get('/:id',
  * @apiError 404 Quote not found.
  */
 router.put('/:id',
-  body({ verse, application, lessons, date, user }),
+  body({ verse, application, lessons, date, user,quote }),
   update)
 
 /**

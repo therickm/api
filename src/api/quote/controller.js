@@ -11,6 +11,7 @@ export const create = ({ bodymen: { body } }, res, next) =>
     .then((quote) => quote.view(true))
     .then(success(res, 201))
     .then(res=>{
+      console.log(body);
       User.findById(res.id)
       .then(({followers,church})=>{
         followers.map(follower=>notifyUsers(follower.token,process.env.apiKey,{title:"New Quote", body:church +' shared a new quote'}))

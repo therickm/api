@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import moment from 'moment'
 
 const quoteSchema = new Schema({
   verse: {
@@ -36,7 +37,7 @@ quoteSchema.methods = {
       verse: this.verse,
       application: this.application,
       lessons: this.lessons,
-      date: this.date,
+      date: moment(this.date).format('YYYY-MM-DD'),
       user: this.user,
       quote: this.quote,
       createdAt: this.createdAt,

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import moment from 'moment'
 
 const eventSchema = new Schema({
   name: {
@@ -41,7 +42,7 @@ eventSchema.methods = {
       name: this.name,
       location: this.location,
       time: this.time,
-      date: this.date,
+      date: moment(this.date).format('YYYY-MM-DD'),
       hashtags: this.hashtags,
       image: this.image,
       description: this.description,

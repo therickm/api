@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import moment from 'moment'
 
 const sermonSchema = new Schema({
   title: {
@@ -41,7 +42,7 @@ sermonSchema.methods = {
       title: this.title,
       location: this.location,
       time: this.time,
-      date: this.date,
+      date: moment(this.date).format('YYYY-MM-DD'),
       hashtags: this.hashtags,
       image: this.image,
       messages: this.messages,
