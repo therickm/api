@@ -51,11 +51,11 @@ export const destroy = ({ params }, res, next) =>
 export const followed = ({ params }, res, next) => {
   let c = []
   all().then(res => {
-    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+    params.client ? res.filter(i => i.followers && i.followers.length > 0 && i.followers.some(e =>e && e.id === params.client)).map(ch =>c.push(ch.id)) : res.map(ch => c.push(ch.id))
   })
     .then(count => Playlist.find({})
       .then((playlists) => {
-        return playlists.filter(item => item.user && c.includes(item.user.id)).map((playlist) => playlist.view())
+        return playlists.filter(item => item.user && c.includes(item.user)).map((playlist) => playlist.view())
       }
       )
     )

@@ -36,11 +36,11 @@ export const churchSearch = ({ params }, res, next) =>
   )
     .then(notFound(res))
     .then((users) => users.map((user) => user.view()))
-    .then(res=>res.filter(c=>c.status==='approved'))
+    .then(res => res.filter(c => c.status === 'approved'))
     .then(success(res))
     .catch(next)
 
-    export const getChurchesByStatus = ({ params }, res, next) =>
+export const getChurchesByStatus = ({ params }, res, next) =>
   User.find(
     {
       $or: [
@@ -59,7 +59,7 @@ export const churchSearch = ({ params }, res, next) =>
 export const follow = (req, res, next) => {
   User.findById(req.params.id === 'me' ? user.id : req.params.id)
     .then(notFound(res))
-    .then((user) => user ? Object.assign(user, { followers: [...user.followers, {id:req.body.app_user_id,token:req.body.app_user_token}] }).save() : null)
+    .then((user) => user ? Object.assign(user, { followers: [...user.followers, { id: req.body.app_user_id, token: req.body.app_user_token }] }).save() : null)
     .then((user) => user ? user.view(true) : null)
     .then(success(res))
     .catch(next)
@@ -154,7 +154,7 @@ export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =
     .then(success(res))
     .catch(next)
 
-    export const approve = ({  params, user }, res, next) =>
+export const approve = ({ params, user }, res, next) =>
   User.findById(params.id === 'me' ? user.id : params.id)
     .then(notFound(res))
     .then((user) => user ? user.set({ status: 'approved' }).save() : null)
@@ -162,7 +162,7 @@ export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =
     .then(success(res))
     .catch(next)
 
-    export const suspend = ({ params, user }, res, next) =>
+export const suspend = ({ params, user }, res, next) =>
   User.findById(params.id === 'me' ? user.id : params.id)
     .then(notFound(res))
     .then((user) => user ? user.set({ status: 'suspended' }).save() : null)
@@ -173,10 +173,10 @@ export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =
 export const destroy = ({ params }, res, next) =>
   User.findById(params.id)
     .then(notFound(res))
-    .then((user) => user ? user.remove().then(()=>res.json({"message": "Deleted"})) : null)
+    .then((user) => user ? user.remove().then(() => res.json({ "message": "Deleted" })) : null)
     .then(success(res, 204))
     .catch(next)
 
 export const following = ({ params }, res, next) =>
   all()
-    .then(res => res.filter(i => i.followers && i.followers.includes(params.app_user_id && i.status ==='approved')).map(ch => c.push(ch.id)))
+    .then(res => res.filter(i => i.followers && i.followers.includes(params.app_user_id && i.status === 'approved')).map(ch => c.push(ch.id)))

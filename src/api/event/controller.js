@@ -3,6 +3,7 @@ import { Event } from '.'
 import { all } from '../user/controller'
 import { notifyUsers } from '../../utils/fcm'
 import User from '../user'
+import moment from 'moment'
 
 export const create = ({ bodymen: { body } }, res, next) =>
   Event.create(body)
@@ -52,11 +53,11 @@ export const destroy = ({ params }, res, next) =>
 export const followed = ({ params }, res, next) => {
   let c = []
   all().then(res => {
-    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+    params.client ? res.filter(i => i.followers && i.followers.length > 0 && i.followers.some(e =>e && e.id === params.client)).map(ch =>c.push(ch.id)) : res.map(ch => c.push(ch.id))
   })
     .then(count => Event.find({})
       .then((events) => {
-        return events.filter(item => item.user && c.includes(item.user.id)).map((event) => event.view())
+        return events.filter(item => item.user && c.includes(item.user) && moment(item.date).isAfter(moment(), "day")).map((event) => event.view())
       }
       )
     )

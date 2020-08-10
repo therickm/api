@@ -33,10 +33,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
 export const followed = ({ params }, res, next) => {
   let c = []
   all().then(res => {
-    console.log("date",params.date);
-    console.log(res.filter(e => e.id === params.client))
-    params.client ? res.filter(i => i.followers && i.followers.length > 0 && i.followers.some(e => {console.log('e',e); return e && e.id === params.client})).map(ch => {console.log('c',ch); return c.push(ch.id)}) : res.map(ch => c.push(ch.id))
-    return c
+    params.client ? res.filter(i => i.followers && i.followers.length > 0 && i.followers.some(e =>e && e.id === params.client)).map(ch =>c.push(ch.id)) : res.map(ch => c.push(ch.id))
   })
     .then(count => Quote.find({})
       .then((quotes) =>quotes.filter(item => item.user && c.includes(item.user)))
