@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 
 const playlistSchema = new Schema({
   date: {
-    type: String
+    type: Date
   },
   songs: {
     type: Array

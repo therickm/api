@@ -15,7 +15,7 @@ const quoteSchema = new Schema({
     type: String
   },
   date: {
-    type: String
+    type: Date
   },
   user: {
     type: Object
