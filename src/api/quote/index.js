@@ -88,6 +88,16 @@ router.delete('/:id',
 router.get('/followed/:client',
   query(),
   followed)
+  /**
+* @api {get} Quotes/followed/:client/:date Quotes From Churches Followed by date
+* @apiName ChurchesFollowedDate
+* @apiGroup Quote
+* @apiSuccess (Success 204) 204 List of quotes from churches followed by a user.
+* @apiError 404 Quote not found.
+*/
+router.get('/followed/:client/:date',
+query(),
+followed)
 
   /**
  * @api {get} /quotes/search/:q/:d Search By Query And Date

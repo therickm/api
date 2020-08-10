@@ -840,6 +840,7 @@ Note
 |---------|-----------|--------------------------------------|
 | verse			| 			|  <p>Quote's verse.</p>							|
 | application			| 			|  <p>Quote's application.</p>							|
+| quote			| 			|  <p>The actual quote.</p>							|
 | lessons			| 			|  <p>Quote's lessons.</p>							|
 | date			| 			|  <p>Quote's date.</p>							|
 | user			| 			|  <p>Quote's user.</p>							|

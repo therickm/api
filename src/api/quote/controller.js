@@ -33,13 +33,14 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
 export const followed = ({ params }, res, next) => {
   let c = []
   all().then(res => {
-    params.client ? res.filter(i => i.followers && i.followers.includes(params.client)).map(ch => c.push(ch.id)) : res.map(ch => c.push(ch.id))
+    console.log("date",params.date);
+    console.log(res.filter(e => e.id === params.client))
+    params.client ? res.filter(i => i.followers && i.followers.length > 0 && i.followers.some(e => {console.log('e',e); return e && e.id === params.client})).map(ch => {console.log('c',ch); return c.push(ch.id)}) : res.map(ch => c.push(ch.id))
+    return c
   })
     .then(count => Quote.find({})
-      .then((quotes) => {
-        return quotes.filter(item => item.user && c.includes(item.user.id)).map((quote) => quote.view())
-      }
-      )
+      .then((quotes) =>quotes.filter(item => item.user && c.includes(item.user)))
+      .then((quote) => params.date ? quote.filter(r=>moment(params.date).isSame(r.date, 'day')).map((quote) => quote.view()):quote.map((event) => event.view()))
     )
     .then(success(res))
     .catch(next)
