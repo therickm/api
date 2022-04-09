@@ -62,7 +62,7 @@
 		"express-force-ssl": "^0.3.2",
 		"jimp": "^0.13.0",
 		"jsonwebtoken": "^8.5.1",
-		"moment": "^2.27.0",
+		"moment": "^2.29.2",
 		"mongoose": "^5.9.4",
 		"mongoose-keywords": "^0.4.0",
 		"morgan": "^1.9.1",
